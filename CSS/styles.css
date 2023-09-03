@@ -108,3 +108,21 @@ footer{
 .categoria{
     margin-top: 40px;
 }
+.dtl_pelicula{
+    margin-right: 15px;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.trailer{
+    margin: 10px;
+    width: 600px;
+    height: 330px;
+}
+.sinopsis{
+    width: 300px;
+    text-align: justify;
+    align-self: flex-start;
+}
