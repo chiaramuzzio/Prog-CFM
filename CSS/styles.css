@@ -59,6 +59,7 @@ p{
 
 main{
     padding: 14vh 3vw 5vh 3vw;
+    margin: auto;
 }
 
 footer{
@@ -110,11 +111,15 @@ footer{
 }
 .dtl_pelicula{
     margin-right: 15px;
+    width: 100%;
+    margin: auto;
 }
 .info{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: left;
+    width: 100%;
 }
 .trailer{
     margin: 10px;
