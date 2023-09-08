@@ -134,3 +134,21 @@ footer{
     justify-content: space-between;
     padding-right: 22px;
 }
+.buscador{
+    display: flex;
+    align-items: center;
+}
+.lupa{
+    margin-right: 5px;
+}
+.buscar{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.333);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 0;
+}
