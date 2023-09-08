@@ -11,22 +11,24 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     </head>
+    <body>
+        <header>
+            <nav class="menu">
+                <a href="./index.html" CLASS="cinepedia"><h1>CINEPEDIA</h1></a>
+                <a class="navegador" href="./favorite.html">Favoritos</a>
+                <a class="navegador" href="./genre.html">Generos</a>
+                <a class="navegador" href="./detail-genre.html">Detalles de genero</a>
+                <a class="navegador" href="./detail-movie.html">Detalles pelicula</a>
+                <a class="navegador" href="./detail-serie.html">Detalles serie</a>
+                <form action="search-result.html" method="GET">
+                    <div class="buscador">
+                        <i class="fa-solid fa-magnifying-glass lupa"></i><input class="buscar" type="text" name="busqueda" value="" placeholder="Buscar">
+                    </div>
+                </form>
+            </nav>
+        </header>
 
-    <header>
-        <nav class="menu">
-            <a href="./index.html" CLASS="cinepedia"><h1>CINEPEDIA</h1></a>
-            <a class="navegador" href="./favorite.html">Favoritos</a>
-            <a class="navegador" href="./genre.html">Generos</a>
-            <a class="navegador" href="./detail-genre.html">Detalles de genero</a>
-            <a class="navegador" href="./detail-movie.html">Detalles pelicula</a>
-            <a class="navegador" href="./detail-serie.html">Detalles serie</a>
-            <form action="search-result.html" method="GET">
-                <div class="buscador">
-                    <i class="fa-solid fa-magnifying-glass lupa"></i><input class="buscar" type="text" name="busqueda" value="" placeholder="Buscar">
-                </div>
-            </form>
-        </nav>
-    </header>
+        <main class="main_detalles"></main>
 
         <footer>
             <p>© 2023 by Chiara Muzzio, Felipe Ruiz Guiñazú, Meline Birnisan</p>
