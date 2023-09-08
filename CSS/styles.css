@@ -56,6 +56,7 @@ p{
 main{
     padding: 14vh 3vw 5vh 3vw;
     margin: auto;
+    height: 100vh;
 }
 
 footer{
