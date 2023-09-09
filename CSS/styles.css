@@ -32,11 +32,20 @@ body{
     margin: 0px;
     display: flex;
     flex-direction: column;
+    width: 100vw;
 }
 
 .cinepedia {
     font-family: 'Poppins', sans-serif;
     color: white;
+}
+
+
+h2{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-weight: 5000;
+    font-size: 25px;
 }
 
 h3{
@@ -56,7 +65,7 @@ p{
 }
 
 .main_home{
-    padding: 14vh 3vw 0vh 3vw;
+    padding: 16vh 3vw 0vh 3vw;
     margin: auto;
 }
 
@@ -96,6 +105,11 @@ footer{
 
 .seccion{
     margin-bottom: 40px;
+}
+
+.gen{
+    padding-bottom: 0%;
+    margin-top: 0px;
 }
 
 .portada{
@@ -162,4 +176,58 @@ footer{
     padding: 5px;
     padding-left: 10px;
     border: 0;
+}
+
+.genres_botones{
+    height: 90vh;
+    width: 100%;
+    padding-top: 10vh;
+    margin: auto;
+}
+
+button {
+    color: #ffffff;
+    background-color: #5028f0;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #5028f0;
+    border-radius: 100px;
+    padding: 15px 50px;
+    margin: 10px;
+    height: 60px;
+    width: 230px;
+    transition: transform 300ms ease-out;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #2d63c8;
+    background-color: #ffffff;
+    transform: translate(0px, 0px) scale(1.02, 1.02);
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.botones_series{
+    padding: 10px;
+}
+
+.botones_pelis{
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.div_boton{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 10px;
 }
