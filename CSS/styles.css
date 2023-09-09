@@ -7,7 +7,7 @@ header{
     background-color: #5028f0;
     box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
-    width: 100vw;
+    width: 100%;
     position: fixed;
     margin: 0px, 0px, 15px, 0px;
     z-index: 1;
@@ -32,7 +32,7 @@ body{
     margin: 0px;
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
 }
 
 .cinepedia {
@@ -65,7 +65,7 @@ p{
 }
 
 .main_home{
-    padding: 16vh 3vw 0vh 3vw;
+    padding: 12vh 3vw 0vh 3vw;
     margin: auto;
 }
 
@@ -78,7 +78,6 @@ p{
 footer{
     display: flex;
     justify-content: center;
-    justify-self: flex-end;
     background-color: #5028f0;
     font-weight: bold;
     padding: 5px;
@@ -125,7 +124,7 @@ footer{
     margin-right: 5px;
     width: 240px;
     line-height: 0px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .categoria{
@@ -231,4 +230,21 @@ button:hover {
     justify-content: space-around;
     align-items: center;
     margin-right: 10px;
+}
+
+@media(max-width:900px){
+    .menu{
+        flex-wrap: nowrap;        
+    }
+
+
+}
+
+@media(max-width:450px){
+    .pelicula{
+        flex-wrap: wrap;
+    }
+    .portada{
+        flex-wrap: wrap;
+    }
 }
