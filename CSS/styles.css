@@ -254,7 +254,7 @@ button:hover {
         padding: 3px;
     }
     .main_home{
-        padding-top: 25vh;
+        padding-top: 35vh;
     }
     .genres_botones{
         padding-top: 75vh;
@@ -284,6 +284,35 @@ button:hover {
     .main_detalles{
         height: 100%;
         padding-top: 270px;
+        width: 100vw;
     }
-
+    .dtl_pelicula{
+        width: min-content;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .sct_detail{
+        width: 100vw;
+    }
+    
+    .info{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100vw;
+    }
+    .fotos_dtl{
+        width: 150px;
+        height: 260px;  
+    }
+    .sinopsis{
+        order: 2;
+        font-size: small;
+        width: 50%;
+        margin-left: 15px;
+    }
+    .trailer{
+        order: 3;
+        height: 280px;
+        width: 90vw;
+    }
 }
