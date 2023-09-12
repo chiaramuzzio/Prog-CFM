@@ -243,6 +243,7 @@ button:hover {
 @media(max-width:450px){
     .pelicula{
         flex-wrap: wrap;
+        width:100%
     }
     .portada{
         flex-wrap: wrap;
