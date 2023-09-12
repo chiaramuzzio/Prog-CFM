@@ -264,13 +264,7 @@ button:hover {
       height: 280px;  
     }
     .pelicula{
-        width: 190px;
-    }
-    footer{
-        font-size: small;
-    }
-    .footer_genero{
-        margin-top: 40px;
+        flex-wrap: wrap;
     }
     .botones{
         justify-content: flex-end;
