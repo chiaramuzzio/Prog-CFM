@@ -255,6 +255,7 @@ button:hover {
     }
     .main_home{
         padding-top: 35vh;
+        margin-top: 50px;
     }
     .genres_botones{
         padding-top: 75vh;
@@ -282,7 +283,6 @@ button:hover {
         margin-bottom: 0;
     }
     .main_detalles{
-        height: 100%;
         padding-top: 270px;
         width: 100vw;
     }
@@ -315,5 +315,9 @@ button:hover {
         order: 3;
         height: 280px;
         width: 90vw;
+    }
+
+    .seccion1 {
+        padding : 20px;
     }
 }
