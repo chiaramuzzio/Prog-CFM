@@ -342,4 +342,9 @@ button:hover {
     .divboton{
         flex-direction: column;
     }
+    .favoritos{
+        display: flex;
+        flex-direction: row;
+        
+    }
 }
