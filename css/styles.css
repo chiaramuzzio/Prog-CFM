@@ -78,11 +78,13 @@ p{
 
 footer{
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     background-color: #5028f0;
     font-weight: bold;
-    padding: 5px;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0px -1px 24px 0px rgba(0,0,0,0.2);
     position:fixed;
@@ -190,7 +192,7 @@ footer{
     padding-top: 5vh;
 }
 
-button {
+.button {
     color: #ffffff;
     background-color: #5028f0;
     font-size: 15px;
@@ -205,7 +207,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.button:hover {
     color: #2d63c8;
     background-color: #ffffff;
     transform: translate(0px, 0px) scale(1.02, 1.02);
@@ -255,6 +257,15 @@ button:hover {
 
 #logoSvg{
     height: 50px;
+    justify-self: flex-start;
+    margin-right: 25px;
+}
+
+.lupa{
+    background-color: #5028f0;
+    color: white;
+    border: 0px;
+    size: 5px;
 }
 
 @media(max-width:420px){
