@@ -252,6 +252,10 @@ button:hover {
     transform: translate(0px, 0px) scale(1.2, 1.2);
 }
 
+#logoSvg{
+    height: 50px;
+}
+
 @media(max-width:420px){
     .menu{
         flex-direction: column;
