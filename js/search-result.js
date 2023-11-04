@@ -1,13 +1,6 @@
-/*let id = queryStringObj.get("id");
+let queryString = location.search;
+let queryStringObj = new URLSearchParams(queryString);
+let resulBusqueda = queryStringObj.get("busqueda");
 
-let proxy = "https://cors-anywhere.herokuapp.com/";
-let endpoint = */
-
-
-const options = {method: 'GET', headers: {accept: 'application/json', Authorization: 'Bearer 378786c706182646715863ed0e6d66cc'}
-};
-
-fetch('https://api.themoviedb.org/3/authentication', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+let textoBusqueda = document.querySelector("#texto-busqueda");
+textoBusqueda.innerText =  `Resultado de búsqueda: ${resulBusqueda}`
