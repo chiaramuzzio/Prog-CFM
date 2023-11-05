@@ -9,40 +9,49 @@ fetch(urlFavs)
     let results = data.results;
     let fotos = ``;
     let div = document.querySelector("#divPrueba");
+    nros = []
     for (let i = 0; i < 5; i++) {
-      let nro = Math.floor(Math.random() * results.length) -1
-      let movie_id = results[nro].id;
-      let movie_title = results[nro].original_title;
-      let fecha = results[nro].release_date;
+      let nro = Math.floor(Math.random() * (results.length-1)) 
+      if (nro in nros){
+        while (nro in nros){
+            nro = Math.floor(Math.random() * (results.length-1)) 
+        }
+      }
+      else{
+        let movie_id = results[nro].id;
+        let movie_title = results[nro].original_title;
+        let fecha = results[nro].release_date;
+  
+        let urlImgs = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=378786c706182646715863ed0e6d66cc`;
+  
+        fetch(urlImgs)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(data) {
+            let posterPath = data.poster_path;
+            if (posterPath) {
+              fotos += `
+              <div class ="portada"> 
+                  <div class="pelicula">
+                      <a href="./detail-movie.html" class="addPic"><img class="fotos" src="https://image.tmdb.org/t/p/original${posterPath}" alt="${movie_title}"></a>
+                      <div class="titfav">
+                          <h4 class="addTitle">${movie_title}</h4>
+                          <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                      </div>
+                      <p class="addDate">Fecha de estreno: ${fecha}</p>
+                  </div>    
+              </div>
+              `;
+            }
+  
+            div.innerHTML = fotos;
+          })
+          .catch(function(error) {
+            console.log("Error al obtener imagen de película: " + error);
+          });
+      }
 
-      let urlImgs = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=378786c706182646715863ed0e6d66cc`;
-
-      fetch(urlImgs)
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
-          let posterPath = data.poster_path;
-          if (posterPath) {
-            fotos += `
-            <div class ="portada"> 
-                <div class="pelicula">
-                    <a href="./detail-movie.html" class="addPic"><img class="fotos" src="https://image.tmdb.org/t/p/original${posterPath}" alt="${movie_title}"></a>
-                    <div class="titfav">
-                        <h4 class="addTitle">${movie_title}</h4>
-                        <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                    </div>
-                    <p class="addDate">Fecha de estreno: ${fecha}</p>
-                </div>    
-            </div>
-            `;
-          }
-
-          div.innerHTML = fotos;
-        })
-        .catch(function(error) {
-          console.log("Error al obtener imagen de película: " + error);
-        });
     }
   })
   .catch(function(error) {
