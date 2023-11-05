@@ -10,9 +10,10 @@ fetch(urlFavs)
     let fotos = ``;
     let div = document.querySelector("#divPrueba");
     for (let i = 0; i < 5; i++) {
-      let movie_id = results[i].id;
-      let movie_title = results[i].original_title;
-      let fecha = results[i].release_date;
+      let nro = Math.floor(Math.random() * results.length) -1
+      let movie_id = results[nro].id;
+      let movie_title = results[nro].original_title;
+      let fecha = results[nro].release_date;
 
       let urlImgs = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=378786c706182646715863ed0e6d66cc`;
 
