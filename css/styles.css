@@ -265,6 +265,32 @@ footer{
     margin-right: 25px;
 } 
 
+/* Estilo básico para el botón */
+.favorite-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Estilo para el corazón (ícono de FontAwesome) dentro del botón */
+  .favorite-button .fa-heart {
+    color: #ffffff; /* Color predeterminado */
+  }
+  
+  /* Estilo para el corazón cuando está activo */
+  .favorite-button .fa-solid {
+    color: #ff0000; /* Color cuando está activo */
+  }
+  
+  /* Estilo para el corazón cuando se pasa el ratón sobre él (opcional) */
+  .favorite-button:hover .fa-heart {
+    color: #ff0000;
+  }
+  
+
 @media(max-width:420px){
     .menu{
         flex-direction: column;
