@@ -14,7 +14,6 @@ function attachButtonListeners() {
   }
 }
 
-
 fetch(generoPeliculas)
 .then(function(response) {
   return response.json()

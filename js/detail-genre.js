@@ -86,8 +86,8 @@ else{
 
 
         for (let i = 0; i<6; i++){
-            let movie_id = results[i].id;
-            let movie_title = results[i].title;
+            let serie_id = results[i].id;
+            let serie_title = results[i].title;
             let fecha = results[i].release_date;
             let posterPath = results[i].poster_path;
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
@@ -95,11 +95,11 @@ else{
             fotos += `
                 <div class ="portada">
                     <div class="pelicula">
-                        <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${movie_title}"></a>
+                        <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
                         <div class="titfav">
-                            <h4 class="addTitle">${movie_title}</h4>
+                            <h4 class="addTitle">${serie_title}</h4>
                             <button class="favorite-button">
-                                <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                                <i id="${serie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
                             </button>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
@@ -119,3 +119,4 @@ else{
 
 
 }
+
