@@ -227,6 +227,7 @@ footer{
 
 .botones_series{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -235,6 +236,7 @@ footer{
 
 .botones_pelis{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -249,6 +251,7 @@ footer{
     align-items: center;
     justify-content: center;
     margin:auto;
+    flex-wrap: wrap;
 }
 
 .fa-heart{

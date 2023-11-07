@@ -34,21 +34,15 @@
                 <article class="botones_pelis">
                     <h2>Películas por genero</h2>
                     <div class="divboton">
-                        <form action="./detail-genre.html" method="GET" class="divboton">
-                            <button class="button" type="submit" name="Peli_Romance">Romance</button>
-                            <button class="button" type="submit" name="Peli_Familia">En Familia</button>
-                            <button class="button" type="submit" name="Peli_Drama">Drama</button>
+                        <form action="./detail-genre.html" method="GET" class="divboton"  id="genero-peli">
                         </form>
                     </div>
                 </article>
 
                 <article class="botones_series">
                     <h2>Series por genero</h2>
-                    <div>
-                        <form action="./detail-genre.html" method="GET" class="divboton">
-                            <button class="button" type="submit" name="Serie_Romance">Romance</button>
-                            <button class="button" type="submit" name="Serie_Familia">En Familia</button>
-                            <button class="button" type="submit" name="Serie_Drama">Drama</button>
+                    <div class="divboton">
+                        <form action="./detail-genre.html" method="GET" class="divboton" id="genero-serie">
                         </form>
                     </div>
                 </article>
@@ -58,7 +52,13 @@
             <img id="logoSvg" src="./img/LOGO/tmdb.png">
             <p>© 2023 by Chiara Muzzio, Felipe Ruiz Guiñazú, Meline Birnisan</p>
         </footer>
-
+        <script type="text/javascript" src="./js/favorite.js"></script>
+        <script type="text/javascript" src="./js/index.js"></script>
+        <script type="text/javascript" src="./js/search-result.js"></script>
+        <script type="text/javascript" src="./js/detail-genre.js"></script>
+        <script type="text/javascript" src="./js/detail-movie.js"></script>
+        <script type="text/javascript" src="./js/detail-serie.js"></script>
+        <script type="text/javascript" src="./js/genres.js"></script>
     </body>
 
 </html>
