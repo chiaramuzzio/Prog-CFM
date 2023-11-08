@@ -43,3 +43,5 @@ fetch(detallePelicula)
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
     });
+
+    

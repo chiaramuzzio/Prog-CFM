@@ -160,6 +160,8 @@ footer{
     width: 300px;
     text-align: justify;
     align-self: flex-start;
+    margin: 15px;
+    margin-top: 0px ;
 }
 .titfav{
     display: flex;
