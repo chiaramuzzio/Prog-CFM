@@ -19,7 +19,7 @@ fetch(detallePelicula)
             let movie_title = results.title;
             let fecha = results.release_date;
             let posterPath = results.poster_path;
-            let generos = results.genres[0].name
+            let generos = results.genres && results.genres.length > 0 ? results.genres[0].name : 'N/A';
             let duracion = results.runtime
             let sinopsis = results.overview
             let calificacion = results.vote_average

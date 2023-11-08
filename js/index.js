@@ -4,17 +4,6 @@ let urlMejoresCalificadas = `https://api.themoviedb.org/3/movie/top_rated?api_ke
 let urlPopulares = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`;
 let urlSeriesPopulares = `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}`;
 
-// function contenerIds() {
-//     let divs = document.querySelectorAll(".pelicula");
-//     for (let i = 0; i < divs.length; i++) {
-//       divs[i].addEventListener("click", function() {
-//         let movie_ids = divs[i].querySelector('i').id;
-//         console.log("Valor del id: " + movie_ids);
-//         localStorage.setItem("id", JSON.stringify(movie_ids));
-//       });
-//     }
-    
-//   }
 function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
@@ -144,6 +133,45 @@ fetch(urlSeriesPopulares)
         return response.json();
     })
 
+    // .then(function(data) {
+    //     console.log(data);
+    //     let results = data.results;
+    //     let fotos = ``;
+    //     let div = document.querySelector("#divSeriesPopulares");
+    //     nros = []
+
+    //     while (nros.length < 6) {
+    //         let nro = Math.floor(Math.random() * (results.length-1));
+    //         if (!nros.includes(nro)) {
+    //             nros.push(nro);
+    //         };
+    //     }
+
+    //     for (let i = 0; i < 5; i++) {
+    //         let nro = nros[i];
+    //         let serie_id = results[nro].id;
+    //         let serie_title = results[nro].name;
+    //         let fecha = results[nro].first_air_date;            
+    //         let posterPath = results[nro].poster_path;
+    //         let poster = "https://image.tmdb.org/t/p/w200" + posterPath
+    //             fotos += `
+    //             <div class ="portada"> 
+    //                 <div class="pelicula">
+    //                     <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
+    //                     <div class="titfav">
+    //                         <h4 class="addTitle">${serie_title}</h4>
+    //                         <i id="${serie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
+    //                     </div>
+    //                     <p class="addDate">Fecha de estreno: ${fecha}</p>
+    //                 </div>    
+    //             </div>
+    //             `;
+
+    //             div.innerHTML = fotos;
+    //         }
+    //     contenerIds()
+    // })
+
     .then(function(data) {
         console.log(data);
         let results = data.results;
@@ -162,13 +190,13 @@ fetch(urlSeriesPopulares)
             let nro = nros[i];
             let serie_id = results[nro].id;
             let serie_title = results[nro].name;
-            let fecha = results[nro].first_air_date;            ;
+            let fecha = results[nro].first_air_date;            
             let posterPath = results[nro].poster_path;
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath
                 fotos += `
                 <div class ="portada"> 
                     <div class="pelicula">
-                        <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
+                        <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
                         <div class="titfav">
                             <h4 class="addTitle">${serie_title}</h4>
                             <i id="${serie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
@@ -182,8 +210,8 @@ fetch(urlSeriesPopulares)
                 console.log(nros);
             }
         contenerIds()
+        console.log(contenerIds());
     })
-
     .catch(function(error) {
         console.log("Error al obtener datos de películas: " + error);
     });
