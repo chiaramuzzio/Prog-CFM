@@ -35,7 +35,7 @@ if (nombregeneropelicula != null){
         let div = document.querySelector("#inner-genero");
 
 
-        for (let i = 0; i<6; i++){
+        for (let i = 0; i<5; i++){
             let movie_id = results[i].id;
             let movie_title = results[i].title;
             let fecha = results[i].release_date;
@@ -85,7 +85,7 @@ else{
         let div = document.querySelector("#inner-genero");
 
 
-        for (let i = 0; i<6; i++){
+        for (let i = 0; i<5; i++){
             let serie_id = results[i].id;
             let serie_title = results[i].title;
             let fecha = results[i].release_date;

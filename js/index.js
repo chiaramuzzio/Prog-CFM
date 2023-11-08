@@ -4,6 +4,32 @@ let urlMejoresCalificadas = `https://api.themoviedb.org/3/movie/top_rated?api_ke
 let urlPopulares = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`;
 let urlSeriesPopulares = `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}`;
 
+// function contenerIds() {
+//     let divs = document.querySelectorAll(".pelicula");
+//     for (let i = 0; i < divs.length; i++) {
+//       divs[i].addEventListener("click", function() {
+//         let movie_ids = divs[i].querySelector('i').id;
+//         console.log("Valor del id: " + movie_ids);
+//         localStorage.setItem("id", JSON.stringify(movie_ids));
+//       });
+//     }
+    
+//   }
+function contenerIds() {
+    let divs = document.querySelectorAll(".pelicula");
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].addEventListener("click", function() {
+            let movie_id = divs[i].querySelector('i').id;
+            let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
+            if (!storedIds.includes(movie_id)) {
+                storedIds.push(movie_id);
+                localStorage.setItem("ids", JSON.stringify(storedIds));
+            }
+        });
+    }
+    console.log(localStorage.getItem("ids"));
+}
+
 
 fetch(urlMejoresCalificadas)
     .then(function(response) {
@@ -34,7 +60,7 @@ fetch(urlMejoresCalificadas)
                 fotos += `
                 <div class ="portada"> 
                     <div class="pelicula">
-                        <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${movie_title}"></a>
+                        <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                         <div class="titfav">
                             <h4 class="addTitle">${movie_title}</h4>
                             <button class="favorite-button">
@@ -49,6 +75,8 @@ fetch(urlMejoresCalificadas)
                 div.innerHTML = fotos;
                 console.log(nros);
             }
+        contenerIds()
+        console.log(contenerIds());
     })
 
     .catch(function(error) {
@@ -98,6 +126,7 @@ fetch(urlPopulares)
                 </div>
             `;
         }
+    contenerIds()
         
         div.innerHTML = fotos;
         console.log(nros);
@@ -106,6 +135,9 @@ fetch(urlPopulares)
     .catch(function(error) {
         console.log("Error al obtener datos de películas: " + error);
     });
+    
+
+
 
 fetch(urlSeriesPopulares)
     .then(function(response) {
@@ -149,6 +181,7 @@ fetch(urlSeriesPopulares)
                 div.innerHTML = fotos;
                 console.log(nros);
             }
+        contenerIds()
     })
 
     .catch(function(error) {
