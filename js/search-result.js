@@ -8,6 +8,21 @@ textoBusqueda.innerText =  `Resultado de búsqueda: ${resulBusqueda}`;
 let api_key = "378786c706182646715863ed0e6d66cc";
 let urlBusqueda = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${resulBusqueda}`;
 
+function contenerIds() {
+    let divs = document.querySelectorAll(".pelicula");
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].addEventListener("click", function() {
+            let movie_id = divs[i].querySelector('i').id;
+            let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
+            if (!storedIds.includes(movie_id)) {
+                storedIds.push(movie_id);
+                localStorage.setItem("ids", JSON.stringify(storedIds));
+            }
+        });
+    }
+    console.log(localStorage.getItem("ids"));
+}
+
 fetch(urlBusqueda)
     .then(function (response) {
         return response.json();
@@ -40,7 +55,7 @@ fetch(urlBusqueda)
                 </div>
                 `;
             }
-
+                contenerIds()
                 div.innerHTML = fotos;
     })
 
