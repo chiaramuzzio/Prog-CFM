@@ -7,6 +7,8 @@ console.log("idsRecuperado:", idsRecuperado);
 let api_key = "378786c706182646715863ed0e6d66cc"
 let detallePelicula = `https://api.themoviedb.org/3/tv/${idsRecuperado}?api_key=${api_key}`
 let botonRecomend = `https://api.themoviedb.org/3/tv/${idsRecuperado}/recommendations?api_key=${api_key}`
+let botonReviews = `https://api.themoviedb.org/3/tv/${idsRecuperado}/reviews?api_key=${api_key}`
+
 
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
@@ -15,7 +17,13 @@ peliculas_recomendacion.style.display = 'none';
 botonrecom.addEventListener('click', function(){    
     peliculas_recomendacion.style.display = 'flex';        
 })
+let botonreview = document.querySelector(".botonreview")
+let peli_reviews = document.querySelector(".peli_reviews")
 
+peli_reviews.style.display = 'none';
+botonreview.addEventListener('click', function(){    
+    peli_reviews.style.display = 'flex';        
+})
 console.log(idsRecuperado);
 
 fetch(detallePelicula)
@@ -85,7 +93,42 @@ fetch(detallePelicula)
                 .catch(function(error){
                 console.log('El error es: ' + error);
             })
-    })
+            fetch(botonReviews)
+            .then(function(response){
+            return response.json();
+        })
+            .then(function(data){
+            console.log(data);
+            let results = data.results;
+            let div_peli_review = document.querySelector(".peli_reviews")
+            let reviewss
+            if (results.length != 0) {
+                for (let i = 0; i < results.length ; i++) {
+                    let movie_author = results[i].author;
+                    let content_i = results[i].content;
+                    reviewss += `
+                        <div> 
+                            <p> ${content_i} </p>
+                            <h3> ${movie_author} </h3>
+                        </div> 
+                        `
+                        if(i == 2) {
+                            break
+                        }
+                }}
+            else {
+                let div_peli_review = document.querySelector(".peli_reviews");
+                reviewss = `No hay reviews disponibles para este titulo.`
+
+            }
+        div_peli_review.innerHTML= reviewss
+                 
+        })
+            .catch(function(error){
+            console.log('El error es: ' + error);
+        })
+})
+
 
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
