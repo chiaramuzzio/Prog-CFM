@@ -294,6 +294,10 @@ footer{
   .favorite-button:hover .fa-heart {
     color: #ff0000;
   }
+
+.botonrecom{
+    
+}
   
 
 @media(max-width:420px){

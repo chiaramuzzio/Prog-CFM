@@ -7,6 +7,14 @@ let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recomme
 
 console.log(idsRecuperado);
 
+let botonrecom = document.querySelector(".botonrecom")
+let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
+
+peliculas_recomendacion.style.display = 'none';
+botonrecom.addEventListener('click', function(){    
+    peliculas_recomendacion.style.display = 'flex';        
+})
+
 fetch(detallePelicula)
     .then(function (response) {
         return response.json();
@@ -72,6 +80,7 @@ fetch(detallePelicula)
                         `;
                     }
                 div_peli_recom.innerHTML=peliss
+                
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
