@@ -55,8 +55,8 @@ fetch(urlBusqueda)
                 </div>
                 `;
             }
-                contenerIds()
                 div.innerHTML = fotos;
+                contenerIds()
     })
 
     .catch(function (error) {

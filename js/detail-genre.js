@@ -61,9 +61,9 @@ if (nombregeneropelicula != null){
                 </div>
                 `;
             }
-            contenerIds()
 
-                div.innerHTML = fotos;
+            div.innerHTML = fotos;
+            contenerIds()
 
 
     })

@@ -270,7 +270,6 @@ footer{
     margin-right: 25px;
 } 
 
-/* Estilo básico para el botón */
 .favorite-button {
     background: transparent;
     border: none;
@@ -280,20 +279,87 @@ footer{
     outline: none;
   }
   
-  /* Estilo para el corazón (ícono de FontAwesome) dentro del botón */
   .favorite-button .fa-heart {
-    color: #ffffff; /* Color predeterminado */
+    color: #ffffff; 
   }
   
-  /* Estilo para el corazón cuando está activo */
   .favorite-button .fa-solid {
-    color: #ff0000; /* Color cuando está activo */
+    color: #ff0000;
   }
   
-  /* Estilo para el corazón cuando se pasa el ratón sobre él (opcional) */
   .favorite-button:hover .fa-heart {
     color: #ff0000;
   }
+
+.funcion{
+    display: flex;
+    padding-top: 30px;
+}
+
+.botonrecom{
+    margin-right: 15px;
+    color: #ffffff;
+    background-color: #5028f0;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #5028f0;
+    border-radius: 100px;
+    padding: 15px 50px;
+    margin-right: 20px;
+    height: 60px;
+    width: 230px;
+    transition: transform 300ms ease-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.botonreview{
+    margin-right: 15px;
+    color: #ffffff;
+    background-color: #5028f0;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #5028f0;
+    border-radius: 100px;
+    padding: 15px 50px;
+    height: 60px;
+    width: 230px;
+    transition: transform 300ms ease-out;
+    cursor: pointer;
+}
+
+#recomendaciones {
+    margin-top: 30px;
+}
+
+#reviews{
+    margin-top: 30px;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.div_reviews_css{
+    background-color:#5028f0;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.peli_reviews{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.author_css{
+    margin-left: 30px;
+}
+
 
 @media(max-width:420px){
     .menu{
