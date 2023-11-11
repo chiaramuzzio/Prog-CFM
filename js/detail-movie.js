@@ -101,27 +101,33 @@ fetch(detallePelicula)
                 let results = data.results;
                 let div_peli_recom = document.querySelector(".peliculas_recomendacion")
                 let peliss = ""
-                for (let i = 0; i < 5; i++) {
-                    let movie_id = results[i].id;
-                    let movie_title = results[i].title;
-                    let fecha = results[i].release_date;
-                    let posterPath = results[i].poster_path
-                    let poster = "https://image.tmdb.org/t/p/w200" + posterPath
-                    peliss += `
-                    <div class ="portada"> 
-                        <div class="pelicula">
-                            <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
-                            <div class="titfav">
-                                <h4 class="addTitle">${movie_title}</h4>
-                                <button class="favorite-button">
-                                    <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                                </button>
-                            </div>
-                            <p class="addDate">Fecha de estreno: ${fecha}</p>
-                        </div>    
-                    </div>
-                    `;
-                    }
+                if (results.length != 0) {
+                    for (let i = 0; i < 5; i++) {
+                        let movie_id = results[i].id;
+                        let movie_title = results[i].title;
+                        let fecha = results[i].release_date;
+                        let posterPath = results[i].poster_path
+                        let poster = "https://image.tmdb.org/t/p/w200" + posterPath
+                        peliss += `
+                        <div class ="portada"> 
+                            <div class="pelicula">
+                                <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                                <div class="titfav">
+                                    <h4 class="addTitle">${movie_title}</h4>
+                                    <button class="favorite-button">
+                                        <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                                    </button>
+                                </div>
+                                <p class="addDate">Fecha de estreno: ${fecha}</p>
+                            </div>    
+                        </div>
+                        `;
+                        }
+                }
+                else {
+                    let div_peli_recom = document.querySelector(".peliculas_recomendacion");
+                    peliss += `<p>No hay recomendaciones disponibles para este titulo.</p>`
+                }
                 div_peli_recom.innerHTML = peliss
                 contenerIds()
                 
