@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", function(){
+
+let load = document.querySelector(".main_load")
+let main = document.querySelector(".main_res")
+
+load.style.display = "none"
+main.style.display = "block"
+
+
 let queryString = location.search;
 let queryStringObj = new URLSearchParams(queryString);
 let resulBusqueda = queryStringObj.get("busqueda");
@@ -62,4 +71,4 @@ fetch(urlBusqueda)
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
     });
-
+})

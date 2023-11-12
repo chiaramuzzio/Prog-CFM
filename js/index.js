@@ -4,6 +4,8 @@ let urlMejoresCalificadas = `https://api.themoviedb.org/3/movie/top_rated?api_ke
 let urlPopulares = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`;
 let urlSeriesPopulares = `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}`;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
@@ -18,6 +20,74 @@ function contenerIds() {
     }
     console.log(localStorage.getItem("ids"));
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// function generarGuestSession() {
+//     let guestSession = `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${api_key}`
+
+//     return fetch(guestSession)
+//       .then(response => response.json())
+//       .then(function(data) {
+//         console.log(data);
+//         let guestSessionId = data.guest_session_id
+//       })
+//       .catch(function(error) {
+//         console.log("Error: " + error);
+//       })
+//   }
+
+// function agregarFavorito(movieId) {
+//     const url = `https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=${api_key}&guest_session_id=d4f0377fc7914400d7fe13a2e1422e0c`;
+  
+//     const data = {
+//       media_type: 'movie',
+//       media_id: movieId,
+//       favorite: true,
+//     };
+  
+//     return fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     })
+//       .then(response => response.json())
+//       .then(result => {
+//         console.log('Película agregada a favoritos:', result);
+//       })
+//       .catch(error => console.error('Error al agregar película a favoritos:', error));
+//   }
+  
+// function eliminarDeFavoritos(movieId) {
+//     const url = `https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=${api_key}&guest_session_id=d4f0377fc7914400d7fe13a2e1422e0c}`;
+
+//     const data = {
+//         media_type: 'movie',
+//         media_id: movieId,
+//         favorite: false,
+//     };
+
+//     return fetch(url, {
+//         method: 'POST',
+//         headers: {
+//         'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data),
+//     })
+//         .then(response => response.json())
+//         .then(result => {
+//         console.log('Película eliminada de favoritos:', result);
+//         })
+//         .catch(error => console.error('Error al eliminar película de favoritos:', error));
+// }
+
+// const movieId = 12345;
+// generarGuestSession()
+// agregarFavorito(movieId)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 fetch(urlMejoresCalificadas)
     .then(function(response) {
@@ -70,6 +140,7 @@ fetch(urlMejoresCalificadas)
         console.log("Error al obtener datos de películas: " + error);
     });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 fetch(urlPopulares)
     .then(function(response) {
@@ -122,7 +193,9 @@ fetch(urlPopulares)
     .catch(function(error) {
         console.log("Error al obtener datos de películas: " + error);
     });
-    
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 fetch(urlSeriesPopulares)
     .then(function(response) {
         return response.json();
@@ -173,5 +246,3 @@ fetch(urlSeriesPopulares)
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-

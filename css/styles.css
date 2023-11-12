@@ -360,6 +360,16 @@ footer{
     margin-left: 30px;
 }
 
+.main_res{
+    display: none;
+}
+
+#loadingGif{
+    display: block;
+    margin: auto;
+    margin-top: 15%;
+    width: 5%;
+}
 
 @media(max-width:420px){
     .menu{
