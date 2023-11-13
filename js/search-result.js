@@ -42,6 +42,10 @@ fetch(urlBusqueda)
         let fotos = ``;
         let div = document.querySelector("#resultados-busqueda");
 
+        if (results.length === 0) {
+
+            div.innerHTML = '<p class=“no_result" >No hay resultado para su búsqueda</p>';
+        } else {
         for (let i = 0; i<6; i++){
             let movie_id = results[i].id;
             let movie_title = results[i].title;
@@ -65,7 +69,10 @@ fetch(urlBusqueda)
                 `;
             }
                 div.innerHTML = fotos;
-                contenerIds()
+                contenerIds();
+            }
+
+                
     })
 
     .catch(function (error) {

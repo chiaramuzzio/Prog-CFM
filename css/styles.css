@@ -137,6 +137,10 @@ footer{
 .categoria{
     margin-top: 40px;
 }
+
+.no_result{
+    text-align: center;
+}
 .dtl_pelicula{
     display: flex;
     flex-direction: column;
