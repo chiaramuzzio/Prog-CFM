@@ -1,6 +1,7 @@
 let idsRecuperado = localStorage.getItem("ids");
 idsRecuperado = JSON.parse(idsRecuperado)
 
+
 function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
@@ -15,15 +16,19 @@ function contenerIds() {
     }
 }
 
+
 let api_key = "378786c706182646715863ed0e6d66cc"
 let detallePelicula = `https://api.themoviedb.org/3/movie/${idsRecuperado}?api_key=${api_key}`
 let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recommendations?api_key=${api_key}`
 let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?api_key=${api_key}`
 
+
 console.log(idsRecuperado);
+
 
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
+
 
 peliculas_recomendacion.style.display = 'none';
 botonrecom.addEventListener('click', function(){
@@ -37,11 +42,13 @@ botonrecom.addEventListener('click', function(){
         else{
             peliculas_recomendacion.style.display = "none"
         }
-}     
+}    
 })
+
 
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
+
 
 peli_reviews.style.display = 'none';
 botonreview.addEventListener('click', function(){    
@@ -57,6 +64,7 @@ botonreview.addEventListener('click', function(){
         }
     }
 })
+
 
 fetch(detallePelicula)
     .then(function (response) {
@@ -75,22 +83,65 @@ fetch(detallePelicula)
             let sinopsis = results.overview
             let calificacion = results.vote_average
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
-            
-           let fotos = `
+            let urlVideo = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${api_key}`
+            fetch(urlVideo)
+                .then(function(response) {
+                return response.json()
+                })
+                .then(function(data) {
+                console.log(data);
+                let results = data.results
+                let fotos = ""
+                if (results.length != 0){
+                    let videoKey = results[0].key
+                    let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
+                    fotos += `
                     <a name=${movie_title}><h3>${movie_title}</h3></a>
                     <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
-                    <div class="info"> 
+                    <div class="info">
                         <img class="fotos" src="${poster}">
-                        
+                        <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
                         <p class="sinopsis">"${sinopsis}"</p>
                     </div>
                 `;
+                div.innerHTML = fotos;
+                }
+                else{
+                    fotos += `
+                    <a name=${movie_title}><h3>${movie_title}</h3></a>
+                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
+                    <div class="info">
+                        <img class="fotos" src="${poster}">
+                        <p class="sinopsis">"${sinopsis}"</p>
+                    </div>
+                    <p>No hay trailer disponible para este titulo.</p>
+                `
+                div.innerHTML = fotos;
+                }
+                })
+                .catch(function(error) {
+                console.log("Error: " + error);
+                })
 
-                div.innerHTML = fotos;                
+
+        //    let fotos = `
+        //             <a name=${movie_title}><h3>${movie_title}</h3></a>
+        //             <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
+        //             <div class="info">
+        //                 <img class="fotos" src="${poster}">
+                       
+        //                 <p class="sinopsis">"${sinopsis}"</p>
+        //             </div>
+        //         `;
+
+
+                               
                 //AGREGAR ALGO EN EL ESPACIO VACIO
                 localStorage.removeItem("ids")
 
+
 ///////////////////////////////////////
+
 
                 fetch(botonRecomend)
                 .then(function(response){
@@ -109,7 +160,7 @@ fetch(detallePelicula)
                         let posterPath = results[i].poster_path
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath
                         peliss += `
-                        <div class ="portada"> 
+                        <div class ="portada">
                             <div class="pelicula">
                                 <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                                 <div class="titfav">
@@ -130,11 +181,12 @@ fetch(detallePelicula)
                 }
                 div_peli_recom.innerHTML = peliss
                 contenerIds()
-                
+               
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
             })
+
 
             ////////////
             fetch(botonReviews)
@@ -151,10 +203,10 @@ fetch(detallePelicula)
                         let movie_author = results[i].author;
                         let content_i = results[i].content;
                         reviewss += `
-                            <div class="div_reviews_css"> 
+                            <div class="div_reviews_css">
                                 <p>${content_i}</p>
                                 <h3 class="author_css">— ${movie_author}</h3>
-                            </div> 
+                            </div>
                             `
                             if(i == 2) {
                                 break
@@ -165,9 +217,9 @@ fetch(detallePelicula)
                     let div_peli_review = document.querySelector(".peli_reviews");
                     reviewss += `<p>No hay reviews disponibles para este titulo.</p>`
                 }
-            
+           
                 div_peli_review.innerHTML= reviewss
-                contenerIds()             
+                contenerIds()            
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
