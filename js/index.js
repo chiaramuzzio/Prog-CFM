@@ -21,72 +21,6 @@ function contenerIds() {
     console.log(localStorage.getItem("ids"));
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-// function generarGuestSession() {
-//     let guestSession = `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${api_key}`
-
-//     return fetch(guestSession)
-//       .then(response => response.json())
-//       .then(function(data) {
-//         console.log(data);
-//         let guestSessionId = data.guest_session_id
-//       })
-//       .catch(function(error) {
-//         console.log("Error: " + error);
-//       })
-//   }
-
-// function agregarFavorito(movieId) {
-//     const url = `https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=${api_key}&guest_session_id=d4f0377fc7914400d7fe13a2e1422e0c`;
-  
-//     const data = {
-//       media_type: 'movie',
-//       media_id: movieId,
-//       favorite: true,
-//     };
-  
-//     return fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     })
-//       .then(response => response.json())
-//       .then(result => {
-//         console.log('Película agregada a favoritos:', result);
-//       })
-//       .catch(error => console.error('Error al agregar película a favoritos:', error));
-//   }
-  
-// function eliminarDeFavoritos(movieId) {
-//     const url = `https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=${api_key}&guest_session_id=d4f0377fc7914400d7fe13a2e1422e0c}`;
-
-//     const data = {
-//         media_type: 'movie',
-//         media_id: movieId,
-//         favorite: false,
-//     };
-
-//     return fetch(url, {
-//         method: 'POST',
-//         headers: {
-//         'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(data),
-//     })
-//         .then(response => response.json())
-//         .then(result => {
-//         console.log('Película eliminada de favoritos:', result);
-//         })
-//         .catch(error => console.error('Error al eliminar película de favoritos:', error));
-// }
-
-// const movieId = 12345;
-// generarGuestSession()
-// agregarFavorito(movieId)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 fetch(urlMejoresCalificadas)
@@ -246,3 +180,25 @@ fetch(urlSeriesPopulares)
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+document.addEventListener("DOMContentLoaded", function(){
+    let favoritos = JSON.parse(sessionStorage.getItem("favoritos")) || [];
+    let arrayFav = document.querySelectorAll(".fa-heart");
+    for(let i = 0 ; i < arrayFav.length ; i++) {
+      arrayFav[i].addEventListener('click', function() {
+        let idCora = arrayFav[i].get('id') 
+        if (favoritos.includes(idCora)) {
+            let indice = favoritos.indexOf(idCora)
+            favoritos.splice(indice, 1);
+           
+        } else {
+            favoritos.push(idCora);
+        }
+  
+        let favoritosToString = JSON.stringify(favoritos);
+        sessionStorage.setItem('favoritos', favoritosToString )
+        console.log(favoritos)
+      })
+  
+  }})

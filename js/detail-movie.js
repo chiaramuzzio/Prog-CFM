@@ -78,7 +78,12 @@ fetch(detallePelicula)
             let movie_title = results.title;
             let fecha = results.release_date;
             let posterPath = results.poster_path;
-            let generos = results.genres && results.genres.length > 0 ? results.genres[0].name : 'N/A';
+            let generos = results.genres 
+            let generosAgregar = "";
+            for (let i = 0; i < generos.length; i++){
+                let gen = generos[i].name
+                generosAgregar += `${gen} `
+            }
             let duracion = results.runtime
             let sinopsis = results.overview
             let calificacion = results.vote_average
@@ -97,7 +102,7 @@ fetch(detallePelicula)
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
                     fotos += `
                     <a name=${movie_title}><h3>${movie_title}</h3></a>
-                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
+                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
@@ -109,7 +114,7 @@ fetch(detallePelicula)
                 else{
                     fotos += `
                     <a name=${movie_title}><h3>${movie_title}</h3></a>
-                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
+                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <p class="sinopsis">"${sinopsis}"</p>
