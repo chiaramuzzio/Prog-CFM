@@ -3,16 +3,16 @@ let generoPeliculas = `https://api.themoviedb.org/3/genre/movie/list?api_key=${a
 let generoSeries = `https://api.themoviedb.org/3/genre/tv/list?api_key=${api_key}`
 
 
-function attachButtonListeners() {
+function nombreGenero() {
   let botones = document.querySelectorAll(".button");
   for (let i = 0; i < botones.length; i++) {
     botones[i].addEventListener("click", function() {
-      let idBoton = botones[i].id;
-      console.log("Valor del botón: " + idBoton);
-      localStorage.setItem("id", JSON.stringify(idBoton));
+      let nomGenero = botones[i].id;
+      localStorage.setItem("name", JSON.stringify(nomGenero));
     });
   }
 }
+
 
 fetch(generoPeliculas)
 .then(function(response) {
@@ -27,16 +27,17 @@ fetch(generoPeliculas)
     for(let i=0; i<genre.length; i++){
         let id = genre[i].id
         let name = genre[i].name
-        contenido += `<button class="button" type="submit" name="boton-pelicula" value="${name}" id="${id}">${name}</button>`
+        contenido += `<button class="button" type="submit" name="boton-pelicula" value="${id}" id="${name}">${name}</button>`
     }
     divPeliculas.innerHTML = contenido
-    attachButtonListeners();
+    nombreGenero()
 })
 .catch(function(error) {
   console.log("Error: " + error);
 })
 
 
+/////////////////////////////////////////////////////
 
 
 fetch(generoSeries)
@@ -51,14 +52,15 @@ fetch(generoSeries)
     for(let i=0; i<genre.length; i++){
         let id = genre[i].id
         let name = genre[i].name
-        contenido += `<button class="button" type="submit" name="boton-serie" value="${name}" id="${id}">${name}</button>`
+        contenido += `<button class="button" type="submit" name="boton-serie" value="${id}" id="${name}">${name}</button>`
     }
     divPeliculas.innerHTML = contenido
-  attachButtonListeners();
+    nombreGenero()
 
 
 })
+
+
 .catch(function(error) {
   console.log("Error: " + error);
 })
-
