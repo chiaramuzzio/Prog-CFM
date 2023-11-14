@@ -1,21 +1,9 @@
-let idsRecuperado = localStorage.getItem("ids");
-idsRecuperado = JSON.parse(idsRecuperado)
+let queryString = location.search;
+let queryStringObj = new URLSearchParams(queryString);
+let idsRecuperado = queryStringObj.get("serie_id");
 
 
-function contenerIds() {
-    let divs = document.querySelectorAll(".pelicula");
-    for (let i = 0; i < divs.length; i++) {
-        divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('.capturarId').id;
-            let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
-            if (!storedIds.includes(movie_id)) {
-                storedIds.push(movie_id);
-                localStorage.setItem("ids", JSON.stringify(storedIds));
-            }
-        });
-    }
-    console.log(localStorage.getItem("ids"));
-}
+//////////////////////////////////////////////////////////////////////
 
 
 let api_key = "378786c706182646715863ed0e6d66cc"
@@ -24,10 +12,11 @@ let botonRecomend = `https://api.themoviedb.org/3/tv/${idsRecuperado}/recommenda
 let botonReviews = `https://api.themoviedb.org/3/tv/${idsRecuperado}/reviews?api_key=${api_key}`
 
 
-
-
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
+
+
+//////////////////////////////////////////////////////////////////////////////////
 
 
 peliculas_recomendacion.style.display = 'none';
@@ -66,9 +55,7 @@ botonreview.addEventListener('click', function(){
 })
 
 
-
-
-console.log(idsRecuperado);
+///////////////////////////////////////////////////////////////
 
 
 fetch(detallePelicula)
@@ -86,6 +73,14 @@ fetch(detallePelicula)
             let sinopsis = results.overview
             let calificacion = results.vote_average
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
+            let generos = results.genres
+            let generosAgregar = "";
+            for (let i = 0; i < generos.length; i++){
+                let gen = generos[i].name
+                let genId = generos[i].id
+                generosAgregar += `<a class="link" id="gen" href="./detail-genre.html?boton-serie=${genId}">${gen} </a>`
+            }
+           
             let urlVideo = `https://api.themoviedb.org/3/tv/${movie_id}/videos?api_key=${api_key}`
             fetch(urlVideo)
                 .then(function(response) {
@@ -105,7 +100,7 @@ fetch(detallePelicula)
                             <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
                         </button>
                     </div>
-                    <p>Calificacion: ${calificacion} | ${fecha}</p>
+                    <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
@@ -122,7 +117,7 @@ fetch(detallePelicula)
                             <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
                         </button>
                     </div>
-                    <p>Calificacion: ${calificacion} | ${fecha}</p>
+                    <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <p class="sinopsis">"${sinopsis}"</p>
@@ -135,9 +130,8 @@ fetch(detallePelicula)
                 .catch(function(error) {
                 console.log("Error: " + error);
                 })
-         
-                //AGREGAR ALGO EN EL ESPACIO VACIO
-                localStorage.removeItem("ids")
+
+
 
 
                 ////////////////////////////////////////////////////////////////////////
@@ -156,21 +150,21 @@ fetch(detallePelicula)
                         let movie_title = results[i].name;
                         let fecha = results[i].first_air_date;
                         let posterPath = results[i].poster_path
-                        let poster = "https://image.tmdb.org/t/p/w200" + posterPath
-                            peliss += `
-                            <div class ="portada">
-                                <div class="pelicula">
-                                    <a href="./detail-serie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
-                                    <div class="titfav">
-                                        <h4 class="addTitle capturarId" id="${movie_id}">${movie_title}</h4>
-                                        <button class="favorite-button">
-                                            <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                                        </button>
-                                    </div>
-                                    <p class="addDate">Fecha de estreno: ${fecha}</p>
-                                </div>    
-                            </div>
-                            `;
+                       
+                        let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
+
+
+                        peliss += `
+                <div class ="portada">
+                    <div class="pelicula">
+                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                        <div class="titfav">
+                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                        </div>
+                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                    </div>    
+                </div>
+                `;
                         }
                 }
                 else {
@@ -180,13 +174,16 @@ fetch(detallePelicula)
                 }
 
 
-                div_peli_recom.innerHTML=peliss
-                contenerIds()
-               
+                div_peli_recom.innerHTML=peliss              
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
             })
+
+
+/////////////////////////////////////////////////////////
+
+
             fetch(botonReviews)
             .then(function(response){
             return response.json();
@@ -215,9 +212,10 @@ fetch(detallePelicula)
                 reviewss += `<p>No hay reviews disponibles para este titulo.</p>`
 
 
+
+
             }
         div_peli_review.innerHTML= reviewss
-        contenerIds()
                  
         })
             .catch(function(error){
@@ -226,10 +224,6 @@ fetch(detallePelicula)
 })
 
 
-
-
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
     });
-
-
