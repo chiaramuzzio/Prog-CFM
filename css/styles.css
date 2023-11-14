@@ -273,27 +273,11 @@ footer{
     justify-self: flex-start;
     margin-right: 25px;
 } 
-
-.favorite-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-size: 16px;
-    outline: none;
-  }
   
-  .favorite-button .fa-heart {
-    color: #ffffff; 
-  }
-  
-  .favorite-button .fa-solid {
+.coraLleno{
     color: #ff0000;
-  }
-  
-  .favorite-button:hover .fa-heart {
-    color: #ff0000;
-  }
+    display: none;
+}
 
 .funcion{
     display: flex;
@@ -373,6 +357,12 @@ footer{
     margin: auto;
     margin-top: 15%;
     width: 5%;
+}
+
+#nomandfav{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
 }
 
 @media(max-width:420px){

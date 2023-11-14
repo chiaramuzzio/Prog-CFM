@@ -10,7 +10,7 @@ function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
         divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('i').id;
+            let movie_id = divs[i].querySelector('.capturarId').id;
             let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
             if (!storedIds.includes(movie_id)) {
                 storedIds.push(movie_id);
@@ -54,10 +54,7 @@ fetch(urlMejoresCalificadas)
                     <div class="pelicula">
                         <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                         <div class="titfav">
-                            <h4 class="addTitle">${movie_title}</h4>
-                            <button class="favorite-button">
-                                <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
+                            <h4 id="${movie_id}" class="capturarId">${movie_title}</h4>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
                     </div>    
@@ -110,8 +107,7 @@ fetch(urlPopulares)
                             <img class="fotos" src="${poster}" alt="${movie_title}">
                         </a>
                         <div class="titfav">
-                            <h4 class="addTitle">${movie_title}</h4>
-                            <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        <h4 id="${movie_id}" class="capturarId">${movie_title}</h4>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
                     </div>
@@ -161,8 +157,7 @@ fetch(urlSeriesPopulares)
                     <div class="pelicula">
                         <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
                         <div class="titfav">
-                            <h4 class="addTitle">${serie_title}</h4>
-                            <i id="${serie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            <h4 id="${serie_id}" class="capturarId">${serie_title}</h4>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
                     </div>    
@@ -180,25 +175,3 @@ fetch(urlSeriesPopulares)
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    let favoritos = JSON.parse(sessionStorage.getItem("favoritos")) || [];
-    let arrayFav = document.querySelectorAll(".fa-heart");
-    for(let i = 0 ; i < arrayFav.length ; i++) {
-      arrayFav[i].addEventListener('click', function() {
-        let idCora = arrayFav[i].get('id') 
-        if (favoritos.includes(idCora)) {
-            let indice = favoritos.indexOf(idCora)
-            favoritos.splice(indice, 1);
-           
-        } else {
-            favoritos.push(idCora);
-        }
-  
-        let favoritosToString = JSON.stringify(favoritos);
-        sessionStorage.setItem('favoritos', favoritosToString )
-        console.log(favoritos)
-      })
-  
-  }})

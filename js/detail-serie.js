@@ -6,7 +6,7 @@ function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
         divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('i').id;
+            let movie_id = divs[i].querySelector('.capturarId').id;
             let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
             if (!storedIds.includes(movie_id)) {
                 storedIds.push(movie_id);
@@ -14,6 +14,7 @@ function contenerIds() {
             }
         });
     }
+    console.log(localStorage.getItem("ids"));
 }
 
 
@@ -98,7 +99,12 @@ fetch(detallePelicula)
                     let videoKey = results[0].key
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
                     fotos += `
-                    <a name=${movie_title}><h3>${movie_title}</h3></a>
+                    <div id="nomandfav">
+                        <a name=${movie_title}><h3>${movie_title}</h3></a>
+                        <button class="favorite-button">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </button>
+                    </div>
                     <p>Calificacion: ${calificacion} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
@@ -110,7 +116,12 @@ fetch(detallePelicula)
                 }
                 else{
                     fotos += `
-                    <a name=${movie_title}><h3>${movie_title}</h3></a>
+                    <div id="nomandfav">
+                        <a name=${movie_title}><h3>${movie_title}</h3></a>
+                        <button class="favorite-button">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </button>
+                    </div>
                     <p>Calificacion: ${calificacion} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
@@ -151,7 +162,7 @@ fetch(detallePelicula)
                                 <div class="pelicula">
                                     <a href="./detail-serie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                                     <div class="titfav">
-                                        <h4 class="addTitle">${movie_title}</h4>
+                                        <h4 class="addTitle capturarId" id="${movie_id}">${movie_title}</h4>
                                         <button class="favorite-button">
                                             <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
                                         </button>

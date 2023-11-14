@@ -12,7 +12,7 @@ function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
         divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('i').id;
+            let movie_id = divs[i].querySelector('.capturarId').id;
             let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
             if (!storedIds.includes(movie_id)) {
                 storedIds.push(movie_id);
@@ -20,6 +20,7 @@ function contenerIds() {
             }
         });
     }
+    console.log(localStorage.getItem("ids"));
 }
 
 let titulogenero = document.querySelector("#nombre-genero")
@@ -51,10 +52,7 @@ if (nombregeneropelicula != null){
                     <div class="pelicula">
                         <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${movie_title}"></a>
                         <div class="titfav">
-                            <h4 class="addTitle">${movie_title}</h4>
-                            <button class="favorite-button">
-                                <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
+                            <h4 class="addTitle capturarId" id="${movie_id}">${movie_title}</h4>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
                     </div>    
@@ -100,19 +98,15 @@ else{
                     <div class="pelicula">
                         <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
                         <div class="titfav">
-                            <h4 class="addTitle">${serie_title}</h4>
-                            <button class="favorite-button">
-                                <i id="${serie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
+                            <h4 class="capturarId" id="${serie_id}">${serie_title}</h4>
                         </div>
                         <p class="addDate">Fecha de estreno: ${fecha}</p>
                     </div>    
                 </div>
                 `;
             }
-
+            div.innerHTML = fotos;
             contenerIds()
-                div.innerHTML = fotos;
 
 
     })

@@ -1,12 +1,11 @@
 let idsRecuperado = localStorage.getItem("ids");
 idsRecuperado = JSON.parse(idsRecuperado)
 
-
 function contenerIds() {
     let divs = document.querySelectorAll(".pelicula");
     for (let i = 0; i < divs.length; i++) {
         divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('i').id;
+            let movie_id = divs[i].querySelector('.capturarId').id;
             let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
             if (!storedIds.includes(movie_id)) {
                 storedIds.push(movie_id);
@@ -14,17 +13,19 @@ function contenerIds() {
             }
         });
     }
+    console.log(localStorage.getItem("ids"));
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
 
 let api_key = "378786c706182646715863ed0e6d66cc"
 let detallePelicula = `https://api.themoviedb.org/3/movie/${idsRecuperado}?api_key=${api_key}`
 let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recommendations?api_key=${api_key}`
 let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?api_key=${api_key}`
 
-
 console.log(idsRecuperado);
 
+/////////////////////////////////////////////////////////////////////////////////
 
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
@@ -45,10 +46,10 @@ botonrecom.addEventListener('click', function(){
 }    
 })
 
+////////////////////////////////////////////////////////////////////////
 
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
-
 
 peli_reviews.style.display = 'none';
 botonreview.addEventListener('click', function(){    
@@ -65,6 +66,7 @@ botonreview.addEventListener('click', function(){
     }
 })
 
+///////////////////////////////////////////////////////////////////////////
 
 fetch(detallePelicula)
     .then(function (response) {
@@ -101,7 +103,12 @@ fetch(detallePelicula)
                     let videoKey = results[0].key
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
                     fotos += `
-                    <a name=${movie_title}><h3>${movie_title}</h3></a>
+                    <div id="nomandfav">
+                        <a name=${movie_title}><h3>${movie_title}</h3></a>
+                            <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
+                            <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
+                        
+                    </div>
                     <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
@@ -167,12 +174,9 @@ fetch(detallePelicula)
                         peliss += `
                         <div class ="portada">
                             <div class="pelicula">
-                                <a href="./detail-movie.html" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                                <a href="./detail-movie.html" id="${movie_id}" class="capturarId"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                                 <div class="titfav">
                                     <h4 class="addTitle">${movie_title}</h4>
-                                    <button class="favorite-button">
-                                        <i id="${movie_id}" class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                                    </button>
                                 </div>
                                 <p class="addDate">Fecha de estreno: ${fecha}</p>
                             </div>    
@@ -233,3 +237,49 @@ fetch(detallePelicula)
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
     });
+
+
+////////////////////////////////////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", function(){
+
+    let favoritos = [];
+
+    let recuperoStorage = localStorage.getItem('favoritos');
+
+    if (recuperoStorage != null) {
+        favoritos = JSON.parse(recuperoStorage);
+    }
+
+    let coraLleno = document.querySelector(".coraLleno");
+    let coraVacio = document.querySelector(".coraVacio");
+
+    if (favoritos.includes(favId)) {
+        coraVacio.style.display = 'none';
+        coraLleno.style.display = 'block';
+    }
+
+
+
+    let boton = document.querySelector('.fa-heart');
+
+    let idPeli = boton.id
+
+    boton.addEventListener('click', function() {
+        alert()
+
+        // if (favoritos.includes(idPeli)) {
+        //     let indice = favoritos.indexOf(idPeli)
+        //     favoritos.splice(indice, 1);
+        //     coraVacio.style.display = 'block';
+        //     coraLleno.style.display = 'none';
+        // } else {
+        //     favoritos.push(idPeli);
+        //     coraVacio.style.display = 'none';
+        //     coraLleno.style.display = 'block';
+        // }
+    
+        // let favoritosToString = JSON.stringify(favoritos);
+        // localStorage.setItem('favoritos', favoritosToString )
+    } )
+
+})
