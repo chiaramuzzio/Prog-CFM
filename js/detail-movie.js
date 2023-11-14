@@ -121,10 +121,14 @@ fetch(detallePelicula)
             let generos = results.genres
             let generosAgregar = "";
             for (let i = 0; i < generos.length; i++){
+                if (generos.length === 0){
+                    generosAgregar = `<p> No hay genero</p>`
+                }
+                else{
                 let gen = generos[i].name
                 let genId = generos[i].id
                 generosAgregar += `<a class="link" id="gen" href="./detail-genre.html?boton-pelicula=${genId}">${gen} </a>`
-            }
+                }}
             let duracion = results.runtime
             let sinopsis = results.overview
             let calificacion = results.vote_average
@@ -143,10 +147,9 @@ fetch(detallePelicula)
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
                     fotos += `
                     <div id="nomandfav">
-                        <a name=${movie_title}><h3>${movie_title}</h3></a>
+                        <a name=${movie_title}><h3 class = "titpelii">${movie_title}</h3></a>
                             <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
                             <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                       
                     </div>
                     <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">

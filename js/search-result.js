@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", function(){
     
     
             if (results.length === 0) {
-    
-    
                 div.innerHTML = '<p class=“no_result" >No hay resultado para su búsqueda</p>';
             } else {
             for (let i = 0; i<6; i++){

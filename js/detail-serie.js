@@ -108,8 +108,12 @@ fetch(detallePelicula)
             for (let i = 0; i < generos.length; i++){
                 let gen = generos[i].name
                 let genId = generos[i].id
+                if (generos.length === 0){
+                    generosAgregar = `<p> No hay genero </p>`
+                }
+                else{
                 generosAgregar += `<a class="link" id="gen" href="./detail-genre.html?boton-serie=${genId}">${gen} </a>`
-            }
+                }}
            
             let urlVideo = `https://api.themoviedb.org/3/tv/${movie_id}/videos?api_key=${api_key}`
             fetch(urlVideo)

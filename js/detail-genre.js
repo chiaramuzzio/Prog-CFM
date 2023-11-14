@@ -39,12 +39,6 @@ if (nombregeneropelicula != null){
         let div = document.querySelector("#inner-genero");
 
 
-
-
-
-
-
-
         for (let i = 0; i<5; i++){
             let movie_id = results[i].id;
             let movie_title = results[i].title;
