@@ -1,33 +1,26 @@
-let idRecuperado = localStorage.getItem("id");
-idRecuperado = JSON.parse(idRecuperado)
-
-
 let queryString = location.search;
 let queryStringObj = new URLSearchParams(queryString);
-let nombregeneropelicula = queryStringObj.get("boton-pelicula");
-let nombregeneroserie = queryStringObj.get("boton-serie");
+let nombregeneropelicula = queryStringObj.get("boton-pelicula"); //id peli
+
+
+let nombregeneroserie = queryStringObj.get("boton-serie"); //id serie
+
+
+
+
 let api_key = "378786c706182646715863ed0e6d66cc"
 
-function contenerIds() {
-    let divs = document.querySelectorAll(".pelicula");
-    for (let i = 0; i < divs.length; i++) {
-        divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('.capturarId').id;
-            let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
-            if (!storedIds.includes(movie_id)) {
-                storedIds.push(movie_id);
-                localStorage.setItem("ids", JSON.stringify(storedIds));
-            }
-        });
-    }
-    console.log(localStorage.getItem("ids"));
-}
 
 let titulogenero = document.querySelector("#nombre-genero")
 
+
+let nombre = JSON.parse(localStorage.getItem("name")) || [];
+
+
 if (nombregeneropelicula != null){
-    titulogenero.innerHTML = nombregeneropelicula
-    let detalleGenero = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${idRecuperado}`;
+    titulogenero.innerHTML = nombre
+    let detalleGenero = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${nombregeneropelicula}`;
+
 
     fetch(detalleGenero)
     .then(function(response) {
@@ -38,6 +31,8 @@ if (nombregeneropelicula != null){
         let results = data.results;
         let fotos = ``;
         let div = document.querySelector("#inner-genero");
+
+
 
 
         for (let i = 0; i<5; i++){
@@ -48,20 +43,20 @@ if (nombregeneropelicula != null){
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
            
             fotos += `
-                <div class ="portada">
-                    <div class="pelicula">
-                        <a href="./detail-movie.html" class="addPic"><img class="fotos" src=${poster} alt="${movie_title}"></a>
-                        <div class="titfav">
-                            <h4 class="addTitle capturarId" id="${movie_id}">${movie_title}</h4>
-                        </div>
-                        <p class="addDate">Fecha de estreno: ${fecha}</p>
-                    </div>    
+            <div class ="portada">
+            <div class="pelicula">
+                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                <div class="titfav">
+                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
                 </div>
+                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+            </div>    
+        </div>
                 `;
             }
 
+
             div.innerHTML = fotos;
-            contenerIds()
 
 
     })
@@ -71,9 +66,12 @@ if (nombregeneropelicula != null){
 }
 
 
+
+
 else{
-    titulogenero.innerHTML = nombregeneroserie
-    let detalleGenero = `https://api.themoviedb.org/3/discover/tv?api_key=${api_key}&with_genres=${idRecuperado}`;
+    titulogenero.innerHTML = nombre
+    let detalleGenero = `https://api.themoviedb.org/3/discover/tv?api_key=${api_key}&with_genres=${nombregeneroserie}`;
+
 
     fetch(detalleGenero)
     .then(function(response) {
@@ -86,6 +84,8 @@ else{
         let div = document.querySelector("#inner-genero");
 
 
+
+
         for (let i = 0; i<5; i++){
             let serie_id = results[i].id;
             let serie_title = results[i].name;
@@ -94,27 +94,22 @@ else{
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
            
             fotos += `
-                <div class ="portada">
-                    <div class="pelicula">
-                        <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
-                        <div class="titfav">
-                            <h4 class="capturarId" id="${serie_id}">${serie_title}</h4>
-                        </div>
-                        <p class="addDate">Fecha de estreno: ${fecha}</p>
-                    </div>    
+            <div class="portada">
+            <div class="pelicula">
+                <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
+                <div class="titfav">
+                    <h4 class="capturarId" id="${serie_id}">${serie_title}</h4>
                 </div>
+                <p class="addDate">Fecha de estreno: ${fecha}</p>
+                </div>    
+            </div>
                 `;
             }
             div.innerHTML = fotos;
-            contenerIds()
-
-
     })
+
 
     .catch(function(error) {
     console.log("Error: " + error);
     })
-
-
 }
-

@@ -1,34 +1,27 @@
-let idsRecuperado = localStorage.getItem("ids");
-idsRecuperado = JSON.parse(idsRecuperado)
+let queryString = location.search;
+let queryStringObj = new URLSearchParams(queryString);
+let idsRecuperado = queryStringObj.get("movie_id");
 
-function contenerIds() {
-    let divs = document.querySelectorAll(".pelicula");
-    for (let i = 0; i < divs.length; i++) {
-        divs[i].addEventListener("click", function() {
-            let movie_id = divs[i].querySelector('.capturarId').id;
-            let storedIds = JSON.parse(localStorage.getItem("ids")) || [];
-            if (!storedIds.includes(movie_id)) {
-                storedIds.push(movie_id);
-                localStorage.setItem("ids", JSON.stringify(storedIds));
-            }
-        });
-    }
-    console.log(localStorage.getItem("ids"));
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////
+
 
 let api_key = "378786c706182646715863ed0e6d66cc"
 let detallePelicula = `https://api.themoviedb.org/3/movie/${idsRecuperado}?api_key=${api_key}`
 let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recommendations?api_key=${api_key}`
 let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?api_key=${api_key}`
 
+
 console.log(idsRecuperado);
+
 
 /////////////////////////////////////////////////////////////////////////////////
 
+
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
+
+
 
 
 peliculas_recomendacion.style.display = 'none';
@@ -46,10 +39,13 @@ botonrecom.addEventListener('click', function(){
 }    
 })
 
+
 ////////////////////////////////////////////////////////////////////////
+
 
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
+
 
 peli_reviews.style.display = 'none';
 botonreview.addEventListener('click', function(){    
@@ -66,7 +62,23 @@ botonreview.addEventListener('click', function(){
     }
 })
 
+
 ///////////////////////////////////////////////////////////////////////////
+
+
+function nombreGenero() {
+    let botones = document.querySelectorAll(".link");
+    for (let i = 0; i < botones.length; i++) {
+      botones[i].addEventListener("click", function() {
+        let nomGenero = botones[i].id;
+        localStorage.setItem("name", JSON.stringify(nomGenero));
+      });
+    }
+  }
+
+
+///////////////////////////////////////////////////////////////////////////
+
 
 fetch(detallePelicula)
     .then(function (response) {
@@ -80,11 +92,12 @@ fetch(detallePelicula)
             let movie_title = results.title;
             let fecha = results.release_date;
             let posterPath = results.poster_path;
-            let generos = results.genres 
+            let generos = results.genres
             let generosAgregar = "";
             for (let i = 0; i < generos.length; i++){
                 let gen = generos[i].name
-                generosAgregar += `${gen} `
+                let genId = generos[i].id
+                generosAgregar += `<a class="link" id="gen" href="./detail-genre.html?boton-pelicula=${genId}">${gen} </a>`
             }
             let duracion = results.runtime
             let sinopsis = results.overview
@@ -107,7 +120,7 @@ fetch(detallePelicula)
                         <a name=${movie_title}><h3>${movie_title}</h3></a>
                             <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
                             <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                        
+                       
                     </div>
                     <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
@@ -136,23 +149,11 @@ fetch(detallePelicula)
                 })
 
 
-        //    let fotos = `
-        //             <a name=${movie_title}><h3>${movie_title}</h3></a>
-        //             <p>Calificacion: ${calificacion} | ${duracion} mins | ${generos} | ${fecha}</p>
-        //             <div class="info">
-        //                 <img class="fotos" src="${poster}">
-                       
-        //                 <p class="sinopsis">"${sinopsis}"</p>
-        //             </div>
-        //         `;
-
-
-                               
-                //AGREGAR ALGO EN EL ESPACIO VACIO
-                localStorage.removeItem("ids")
 
 
 ///////////////////////////////////////
+
+
 
 
                 fetch(botonRecomend)
@@ -172,16 +173,16 @@ fetch(detallePelicula)
                         let posterPath = results[i].poster_path
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath
                         peliss += `
-                        <div class ="portada">
-                            <div class="pelicula">
-                                <a href="./detail-movie.html" id="${movie_id}" class="capturarId"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
-                                <div class="titfav">
-                                    <h4 class="addTitle">${movie_title}</h4>
-                                </div>
-                                <p class="addDate">Fecha de estreno: ${fecha}</p>
-                            </div>    
-                        </div>
-                        `;
+                            <div class ="portada">
+                                <div class="pelicula">
+                                    <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                                    <div class="titfav">
+                                    <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                    </div>
+                                    <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                                </div>    
+                            </div>
+                            `;
                         }
                 }
                 else {
@@ -189,12 +190,13 @@ fetch(detallePelicula)
                     peliss += `<p>No hay recomendaciones disponibles para este titulo.</p>`
                 }
                 div_peli_recom.innerHTML = peliss
-                contenerIds()
                
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
             })
+
+
 
 
             ////////////
@@ -228,7 +230,6 @@ fetch(detallePelicula)
                 }
            
                 div_peli_review.innerHTML= reviewss
-                contenerIds()            
             })
                 .catch(function(error){
                 console.log('El error es: ' + error);
@@ -239,19 +240,26 @@ fetch(detallePelicula)
     });
 
 
+
+
 ////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function(){
 
+
     let favoritos = [];
 
+
     let recuperoStorage = localStorage.getItem('favoritos');
+
 
     if (recuperoStorage != null) {
         favoritos = JSON.parse(recuperoStorage);
     }
 
+
     let coraLleno = document.querySelector(".coraLleno");
     let coraVacio = document.querySelector(".coraVacio");
+
 
     if (favoritos.includes(favId)) {
         coraVacio.style.display = 'none';
@@ -259,13 +267,15 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-
     let boton = document.querySelector('.fa-heart');
+
 
     let idPeli = boton.id
 
+
     boton.addEventListener('click', function() {
         alert()
+
 
         // if (favoritos.includes(idPeli)) {
         //     let indice = favoritos.indexOf(idPeli)
@@ -277,9 +287,10 @@ document.addEventListener("DOMContentLoaded", function(){
         //     coraVacio.style.display = 'none';
         //     coraLleno.style.display = 'block';
         // }
-    
+   
         // let favoritosToString = JSON.stringify(favoritos);
         // localStorage.setItem('favoritos', favoritosToString )
     } )
+
 
 })
