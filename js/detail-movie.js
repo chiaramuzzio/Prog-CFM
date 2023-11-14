@@ -3,7 +3,11 @@ let queryStringObj = new URLSearchParams(queryString);
 let idsRecuperado = queryStringObj.get("movie_id");
 
 
+
+
 ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 let api_key = "378786c706182646715863ed0e6d66cc"
@@ -12,14 +16,24 @@ let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recomme
 let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?api_key=${api_key}`
 
 
+
+
 console.log(idsRecuperado);
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////
 
 
+
+
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
+
+
+
+
 
 
 
@@ -40,11 +54,17 @@ botonrecom.addEventListener('click', function(){
 })
 
 
+
+
 ////////////////////////////////////////////////////////////////////////
+
+
 
 
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
+
+
 
 
 peli_reviews.style.display = 'none';
@@ -63,18 +83,24 @@ botonreview.addEventListener('click', function(){
 })
 
 
+
+
 ///////////////////////////////////////////////////////////////////////////
+
+
 
 
 function nombreGenero() {
     let botones = document.querySelectorAll(".link");
     for (let i = 0; i < botones.length; i++) {
       botones[i].addEventListener("click", function() {
-        let nomGenero = botones[i].id;
+        let nomGenero = botones[i].innerText;
         localStorage.setItem("name", JSON.stringify(nomGenero));
       });
     }
   }
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -129,7 +155,6 @@ fetch(detallePelicula)
                         <p class="sinopsis">"${sinopsis}"</p>
                     </div>
                 `;
-                div.innerHTML = fotos;
                 }
                 else{
                     fotos += `
@@ -141,19 +166,18 @@ fetch(detallePelicula)
                     </div>
                     <p>No hay trailer disponible para este titulo.</p>
                 `
-                div.innerHTML = fotos;
                 }
+                div.innerHTML = fotos;
+                nombreGenero()
+
+
                 })
                 .catch(function(error) {
                 console.log("Error: " + error);
                 })
 
 
-
-
 ///////////////////////////////////////
-
-
 
 
                 fetch(botonRecomend)
@@ -195,6 +219,10 @@ fetch(detallePelicula)
                 .catch(function(error){
                 console.log('El error es: ' + error);
             })
+
+
+
+
 
 
 
@@ -246,10 +274,16 @@ fetch(detallePelicula)
 document.addEventListener("DOMContentLoaded", function(){
 
 
+
+
     let favoritos = [];
 
 
+
+
     let recuperoStorage = localStorage.getItem('favoritos');
+
+
 
 
     if (recuperoStorage != null) {
@@ -257,8 +291,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
+
+
     let coraLleno = document.querySelector(".coraLleno");
     let coraVacio = document.querySelector(".coraVacio");
+
+
 
 
     if (favoritos.includes(favId)) {
@@ -267,14 +305,22 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
+
+
     let boton = document.querySelector('.fa-heart');
+
+
 
 
     let idPeli = boton.id
 
 
+
+
     boton.addEventListener('click', function() {
         alert()
+
+
 
 
         // if (favoritos.includes(idPeli)) {
@@ -293,4 +339,8 @@ document.addEventListener("DOMContentLoaded", function(){
     } )
 
 
+
+
 })
+
+

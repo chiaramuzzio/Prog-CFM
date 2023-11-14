@@ -1,8 +1,6 @@
 let queryString = location.search;
 let queryStringObj = new URLSearchParams(queryString);
 let nombregeneropelicula = queryStringObj.get("boton-pelicula"); //id peli
-
-
 let nombregeneroserie = queryStringObj.get("boton-serie"); //id serie
 
 
@@ -11,15 +9,23 @@ let nombregeneroserie = queryStringObj.get("boton-serie"); //id serie
 let api_key = "378786c706182646715863ed0e6d66cc"
 
 
+
+
 let titulogenero = document.querySelector("#nombre-genero")
+
+
 
 
 let nombre = JSON.parse(localStorage.getItem("name")) || [];
 
 
+
+
 if (nombregeneropelicula != null){
     titulogenero.innerHTML = nombre
     let detalleGenero = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${nombregeneropelicula}`;
+
+
 
 
     fetch(detalleGenero)
@@ -31,6 +37,10 @@ if (nombregeneropelicula != null){
         let results = data.results;
         let fotos = ``;
         let div = document.querySelector("#inner-genero");
+
+
+
+
 
 
 
@@ -56,7 +66,11 @@ if (nombregeneropelicula != null){
             }
 
 
+
+
             div.innerHTML = fotos;
+
+
 
 
     })
@@ -68,9 +82,15 @@ if (nombregeneropelicula != null){
 
 
 
+
+
+
+
 else{
     titulogenero.innerHTML = nombre
     let detalleGenero = `https://api.themoviedb.org/3/discover/tv?api_key=${api_key}&with_genres=${nombregeneroserie}`;
+
+
 
 
     fetch(detalleGenero)
@@ -84,8 +104,6 @@ else{
         let div = document.querySelector("#inner-genero");
 
 
-
-
         for (let i = 0; i<5; i++){
             let serie_id = results[i].id;
             let serie_title = results[i].name;
@@ -96,11 +114,11 @@ else{
             fotos += `
             <div class="portada">
             <div class="pelicula">
-                <a href="./detail-serie.html" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
+            <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><img class="fotos" src=${poster} alt="${serie_title}"></a>
                 <div class="titfav">
-                    <h4 class="capturarId" id="${serie_id}">${serie_title}</h4>
+                <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><h4 class="capturarId" id="${serie_id}">${serie_title}</h4></a>
                 </div>
-                <p class="addDate">Fecha de estreno: ${fecha}</p>
+                <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                 </div>    
             </div>
                 `;
@@ -109,7 +127,11 @@ else{
     })
 
 
+
+
     .catch(function(error) {
     console.log("Error: " + error);
     })
 }
+
+

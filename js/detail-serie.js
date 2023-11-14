@@ -3,7 +3,11 @@ let queryStringObj = new URLSearchParams(queryString);
 let idsRecuperado = queryStringObj.get("serie_id");
 
 
+
+
 //////////////////////////////////////////////////////////////////////
+
+
 
 
 let api_key = "378786c706182646715863ed0e6d66cc"
@@ -12,11 +16,17 @@ let botonRecomend = `https://api.themoviedb.org/3/tv/${idsRecuperado}/recommenda
 let botonReviews = `https://api.themoviedb.org/3/tv/${idsRecuperado}/reviews?api_key=${api_key}`
 
 
+
+
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
 
 
+
+
 //////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 peliculas_recomendacion.style.display = 'none';
@@ -35,8 +45,12 @@ botonrecom.addEventListener('click', function(){
 })
 
 
+
+
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
+
+
 
 
 peli_reviews.style.display = 'none';
@@ -56,6 +70,22 @@ botonreview.addEventListener('click', function(){
 
 
 ///////////////////////////////////////////////////////////////
+
+
+function nombreGenero() {
+    let botones = document.querySelectorAll(".link");
+    for (let i = 0; i < botones.length; i++) {
+      botones[i].addEventListener("click", function() {
+        let nomGenero = botones[i].innerText;
+        localStorage.setItem("name", JSON.stringify(nomGenero));
+      });
+    }
+  }
+
+
+///////////////////////////////////////////////////////////////
+
+
 
 
 fetch(detallePelicula)
@@ -107,7 +137,6 @@ fetch(detallePelicula)
                         <p class="sinopsis">"${sinopsis}"</p>
                     </div>
                 `;
-                div.innerHTML = fotos;
                 }
                 else{
                     fotos += `
@@ -124,17 +153,19 @@ fetch(detallePelicula)
                     </div>
                     <p>No hay trailer disponible para este titulo.</p>
                 `
-                div.innerHTML = fotos;
                 }
+                div.innerHTML = fotos;
+                nombreGenero()
+
+
                 })
                 .catch(function(error) {
                 console.log("Error: " + error);
                 })
 
 
-
-
                 ////////////////////////////////////////////////////////////////////////
+               
                 fetch(botonRecomend)
                 .then(function(response){
                 return response.json();
@@ -152,6 +183,8 @@ fetch(detallePelicula)
                         let posterPath = results[i].poster_path
                        
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
+
+
 
 
                         peliss += `
@@ -174,6 +207,8 @@ fetch(detallePelicula)
                 }
 
 
+
+
                 div_peli_recom.innerHTML=peliss              
             })
                 .catch(function(error){
@@ -181,7 +216,11 @@ fetch(detallePelicula)
             })
 
 
+
+
 /////////////////////////////////////////////////////////
+
+
 
 
             fetch(botonReviews)
@@ -214,6 +253,10 @@ fetch(detallePelicula)
 
 
 
+
+
+
+
             }
         div_peli_review.innerHTML= reviewss
                  
@@ -224,6 +267,10 @@ fetch(detallePelicula)
 })
 
 
+
+
     .catch(function (error) {
         console.log("Error al obtener datos de películas: " + error);
     });
+
+
