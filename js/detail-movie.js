@@ -148,7 +148,7 @@ fetch(detallePelicula)
                             <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
                        
                     </div>
-                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                    <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
@@ -159,7 +159,7 @@ fetch(detallePelicula)
                 else{
                     fotos += `
                     <a name=${movie_title}><h3>${movie_title}</h3></a>
-                    <p>Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                    <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
                         <img class="fotos" src="${poster}">
                         <p class="sinopsis">"${sinopsis}"</p>
@@ -295,7 +295,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
     let coraLleno = document.querySelector(".coraLleno");
     let coraVacio = document.querySelector(".coraVacio");
-
 
 
 

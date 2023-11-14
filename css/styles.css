@@ -134,6 +134,10 @@ footer{
     padding-top: 20px;
 }
 
+#gen{
+    color: white;
+    text-decoration: none; 
+}
 .categoria{
     margin-top: 40px;
 }
