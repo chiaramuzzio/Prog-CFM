@@ -121,10 +121,14 @@ fetch(detallePelicula)
             let generos = results.genres
             let generosAgregar = "";
             for (let i = 0; i < generos.length; i++){
+                if (generos.length === 0){
+                    generosAgregar = `<p> No hay genero</p>`
+                }
+                else{
                 let gen = generos[i].name
                 let genId = generos[i].id
                 generosAgregar += `<a class="link" id="gen" href="./detail-genre.html?boton-pelicula=${genId}">${gen} </a>`
-            }
+                }}
             let duracion = results.runtime
             let sinopsis = results.overview
             let calificacion = results.vote_average

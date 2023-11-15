@@ -23,6 +23,10 @@ header{
     flex-wrap: nowrap;
 }
 
+.titpelii{
+    height:fit-content;
+}
+
 .navegador {
     color: white;
     font-family: 'Poppins', sans-serif;
@@ -92,7 +96,6 @@ footer{
     width: 100%;
 
 }
-
 
 .fotos{
     height: 330px;
@@ -194,6 +197,10 @@ footer{
     border: 0px;
     size: 5px;
 }
+
+
+
+
 .buscar{
     font-family: 'Poppins', sans-serif;
     color: white;
