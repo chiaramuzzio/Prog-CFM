@@ -34,30 +34,42 @@ document.addEventListener("DOMContentLoaded", function(){
     
     
             if (results.length === 0) {
-    
-    
-                div.innerHTML = '<p class=“no_result" >No hay resultado para su búsqueda</p>';
-            } else {
-            for (let i = 0; i<6; i++){
-                let movie_id = results[i].id;
-                let movie_title = results[i].title;
-                let fecha = results[i].release_date;
-                let posterPath = results[i].poster_path;
-                let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
-               
-                fotos += `
-                    <div class ="portada">
-                    <div class="pelicula">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
-                        <div class="titfav">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
-                        </div>
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
-                    </div>    
-                    </div>
-                    `;
-                }
-                    div.innerHTML = fotos;
+                div.innerHTML = '<p class=“no_result">No hay resultado para su búsqueda</p>';
+            } 
+            else {
+                for (let i = 0; i<6; i++){
+                    let movie_id = results[i].id;
+                    let movie_title = results[i].title;
+                    let fecha = results[i].release_date;
+                    let posterPath = results[i].poster_path;
+                    let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
+                    if (posterPath != null){
+                        fotos += `
+                            <div class ="portada">
+                            <div class="pelicula">
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                                <div class="titfav">
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                </div>
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                            </div>    
+                            </div>
+                            `;}
+                    else{
+                        fotos += `
+                            <div class ="portada">
+                            <div class="pelicula">
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                                <div class="titfav">
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                </div>
+                                <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                            </div>    
+                            </div>
+                            `;
+                    }
+                    }
+                        div.innerHTML = fotos;
                    
                 }
     

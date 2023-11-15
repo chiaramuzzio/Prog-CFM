@@ -141,35 +141,73 @@ fetch(detallePelicula)
                 if (results.length != 0){
                     let videoKey = results[0].key
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
-                    fotos += `
-                    <div id="nomandfav">
-                        <a name=${movie_title}><h3>${movie_title}</h3></a>
-                            <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
-                            <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                       
-                    </div>
-                    <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
-                    <div class="info">
-                        <img class="fotos" src="${poster}">
-                        <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
-                        <p class="sinopsis">"${sinopsis}"</p>
-                    </div>
-                `;
+                    if (posterPath != null)
+                        {fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
+                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
+                        
+                        </div>
+                        <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="${poster}">
+                            <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                    `;}
+                    else{
+                        fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
+                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
+                        
+                        </div>
+                        <p class="geneross">Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="./img/LOGO/Image_not_available.png">
+                            <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                    `;
+                    }
                 }
                 else{
-                    fotos += `
-                    <a name=${movie_title}><h3>${movie_title}</h3></a>
-                    <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
-                    <div class="info">
-                        <img class="fotos" src="${poster}">
-                        <p class="sinopsis">"${sinopsis}"</p>
-                    </div>
-                    <p>No hay trailer disponible para este titulo.</p>
-                `
+                    if (posterPath != null)
+                        {fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
+                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
+                        
+                        </div>
+                        <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="${poster}">
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                        <p>No hay trailer disponible para este titulo.</p>
+                    `;}
+                    else{
+                        fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
+                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
+                        
+                        </div>
+                        <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="./img/LOGO/Image_not_available.png">
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                        <p>No hay trailer disponible para este titulo.</p>
+                    `;
+                    }
                 }
                 div.innerHTML = fotos;
                 nombreGenero()
-
 
                 })
                 .catch(function(error) {
@@ -196,6 +234,7 @@ fetch(detallePelicula)
                         let fecha = results[i].release_date;
                         let posterPath = results[i].poster_path
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath
+                        if (posterPath != null){
                         peliss += `
                             <div class ="portada">
                                 <div class="pelicula">
@@ -206,7 +245,20 @@ fetch(detallePelicula)
                                     <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                                 </div>    
                             </div>
-                            `;
+                            `;}
+                        else{
+                            peliss += `
+                                <div class ="portada">
+                                    <div class="pelicula">
+                                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                                        <div class="titfav">
+                                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                        </div>
+                                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                                    </div>    
+                                </div>
+                                `
+                        }
                         }
                 }
                 else {

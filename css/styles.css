@@ -174,10 +174,15 @@ footer{
 .titfav{
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    padding-right: 22px;
+    justify-content: left;
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
 .buscador{
     display: flex;
     align-items: center;
@@ -367,6 +372,10 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: left;
+}
+
+.capturarId{
+    text-wrap: wrap;
 }
 
 @media(max-width:420px){

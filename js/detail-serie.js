@@ -123,22 +123,40 @@ fetch(detallePelicula)
                 if (results.length != 0){
                     let videoKey = results[0].key
                     let trailerUrl = `https://www.youtube.com/embed/${videoKey}`
-                    fotos += `
-                    <div id="nomandfav">
-                        <a name=${movie_title}><h3>${movie_title}</h3></a>
-                        <button class="favorite-button">
-                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                        </button>
-                    </div>
-                    <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
-                    <div class="info">
-                        <img class="fotos" src="${poster}">
-                        <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
-                        <p class="sinopsis">"${sinopsis}"</p>
-                    </div>
-                `;
+                    if (posterPath != null)
+                        {fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                            <button class="favorite-button">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </button>
+                        </div>
+                        <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="${poster}">
+                            <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                        `;}
+                    else{
+                        fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                            <button class="favorite-button">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </button>
+                        </div>
+                        <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="./img/LOGO/Image_not_available.png">
+                            <iframe src="${trailerUrl}" class="trailer" frameborder="0" allowfullscreen></iframe>
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                        `;
+                    }
                 }
                 else{
+                    if (posterPath != null){
                     fotos += `
                     <div id="nomandfav">
                         <a name=${movie_title}><h3>${movie_title}</h3></a>
@@ -152,7 +170,23 @@ fetch(detallePelicula)
                         <p class="sinopsis">"${sinopsis}"</p>
                     </div>
                     <p>No hay trailer disponible para este titulo.</p>
-                `
+                `}
+                    else{
+                        fotos += `
+                        <div id="nomandfav">
+                            <a name=${movie_title}><h3>${movie_title}</h3></a>
+                            <button class="favorite-button">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </button>
+                        </div>
+                        <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
+                        <div class="info">
+                            <img class="fotos" src="./img/LOGO/Image_not_available.png">
+                            <p class="sinopsis">"${sinopsis}"</p>
+                        </div>
+                        <p>No hay trailer disponible para este titulo.</p>
+                    `
+                    }
                 }
                 div.innerHTML = fotos;
                 nombreGenero()
@@ -181,23 +215,34 @@ fetch(detallePelicula)
                         let movie_title = results[i].name;
                         let fecha = results[i].first_air_date;
                         let posterPath = results[i].poster_path
-                       
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
+                        if (posterPath != null){
+                            peliss += `
+                                <div class ="portada">
+                                    <div class="pelicula">
+                                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                                        <div class="titfav">
+                                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                        </div>
+                                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                                    </div>    
+                                </div>
+                            
+                                `;}
+                        else{
+                            peliss += `
+                            <div class ="portada">
+                                <div class="pelicula">
+                                    <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                                    <div class="titfav">
+                                    <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                                    </div>
+                                    <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                                </div>    
+                            </div>
+                            `; 
+                        }
 
-
-
-
-                        peliss += `
-                <div class ="portada">
-                    <div class="pelicula">
-                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
-                        <div class="titfav">
-                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
-                        </div>
-                        <a href="./detail-serie.html?serie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
-                    </div>    
-                </div>
-                `;
                         }
                 }
                 else {
@@ -205,8 +250,6 @@ fetch(detallePelicula)
                     peliss += `<p>No hay recomendaciones disponibles para este titulo.</p>`
    
                 }
-
-
 
 
                 div_peli_recom.innerHTML=peliss              

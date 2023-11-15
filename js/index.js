@@ -5,6 +5,23 @@ let urlMejoresCalificadas = `https://api.themoviedb.org/3/movie/top_rated?api_ke
 let urlPopulares = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`;
 let urlSeriesPopulares = `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}`;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function truncar(titulo) {
+        document.querySelector("#valor").style.width = '220px';
+
+        let contenedorElement = document.querySelector("#valor")
+    
+        if (titulo.scrollWidth > contenedorElement.clientWidth) {
+            while (titulo.scrollWidth > contenedorElement.clientWidth && titulo.length > 0) {
+                titulo = titulo.slice(0, -1);
+                titulo = titulo + '...';
+            }
+        }
+
+        return titulo
+        
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,24 +51,41 @@ fetch(urlMejoresCalificadas)
         for (let i = 0; i < 5; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
-            let movie_title = results[nro].title;
+            let movie_title = truncar(results[nro].title);
             let fecha = results[nro].release_date;
             let posterPath = results[nro].poster_path
+
+            if (posterPath != null){
+
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath
                 fotos += `
                 <div class ="portada">
                     <div class="pelicula">
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
                         <div class="titfav">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
                         </div>
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                     </div>    
                 </div>
                 `;
+            }
 
-
+            else{
+                fotos += `
+                <div class ="portada">
+                    <div class="pelicula">
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                        <div class="titfav">
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                        </div>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                    </div>    
+                </div>
+                `
+            }
                 div.innerHTML = fotos;
+
             }
 
 
@@ -92,6 +126,7 @@ fetch(urlPopulares)
             let movie_title = results[nro].title;
             let fecha = results[nro].release_date;
             let posterPath = results[nro].poster_path;
+            if (posterPath != null){
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;
            
             fotos += `
@@ -105,9 +140,24 @@ fetch(urlPopulares)
                     </div>    
                 </div>
                 `;
+            }
+            else{
+                fotos += `
+                <div class ="portada">
+                    <div class="pelicula">
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                        <div class="titfav">
+                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                        </div>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                    </div>    
+                </div>
+                `
+            }
         }
        
         div.innerHTML = fotos;
+
 
 
     })
@@ -148,6 +198,7 @@ fetch(urlSeriesPopulares)
             let serie_title = results[nro].name;
             let fecha = results[nro].first_air_date;            
             let posterPath = results[nro].poster_path;
+            if (posterPath != null){
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath
                 fotos += `
                 <div class ="portada">
@@ -160,14 +211,23 @@ fetch(urlSeriesPopulares)
                     </div>    
                 </div>
                 `;
-
-
-                div.innerHTML = fotos;
             }
+            else{
+                fotos += `
+                <div class ="portada">
+                    <div class="pelicula">
+                        <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><img class="fotos" src="./img/LOGO/Image_not_available.png" alt="${serie_title}"></a>
+                        <div class="titfav">
+                        <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><h4 id="${serie_id}" class="capturarId">${serie_title}</h4></a>
+                        </div>
+                        <a href="./detail-serie.html?serie_id=${serie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
+                    </div>    
+                </div>
+                `;
+            }
+            }
+            div.innerHTML = fotos;
     })
     .catch(function(error) {
         console.log("Error al obtener datos de películas: " + error);
     });
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
