@@ -143,6 +143,10 @@ footer{
 }
 .categoria{
     margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .no_result{
@@ -290,9 +294,12 @@ footer{
     margin-right: 25px;
 } 
   
-.coraLleno{
+.fa-heart.fa-solid{
     color: #ff0000;
-    display: none;
+}
+
+.fa-heart.fa-regular{
+    color: #ffffff;
 }
 
 .funcion{
@@ -379,10 +386,28 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: left;
+    align-items: center;
+}
+
+#titdetmo{
+    margin-right: 15px;
 }
 
 .capturarId{
     text-wrap: wrap;
+}
+
+.boton-eliminar{
+    display: flex;
+    align-items: center;
+}
+
+.eliminar{
+    height:20px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
 }
 
 @media(max-width:420px){

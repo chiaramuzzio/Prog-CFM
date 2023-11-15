@@ -2,41 +2,19 @@ let queryString = location.search;
 let queryStringObj = new URLSearchParams(queryString);
 let idsRecuperado = queryStringObj.get("movie_id");
 
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 let api_key = "378786c706182646715863ed0e6d66cc"
 let detallePelicula = `https://api.themoviedb.org/3/movie/${idsRecuperado}?api_key=${api_key}`
 let botonRecomend = `https://api.themoviedb.org/3/movie/${idsRecuperado}/recommendations?api_key=${api_key}`
 let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?api_key=${api_key}`
 
-
-
-
 console.log(idsRecuperado);
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
-
-
-
-
-
-
-
 
 peliculas_recomendacion.style.display = 'none';
 botonrecom.addEventListener('click', function(){
@@ -53,19 +31,10 @@ botonrecom.addEventListener('click', function(){
 }    
 })
 
-
-
-
 ////////////////////////////////////////////////////////////////////////
-
-
-
 
 let botonreview = document.querySelector(".botonreview")
 let peli_reviews = document.querySelector(".peli_reviews")
-
-
-
 
 peli_reviews.style.display = 'none';
 botonreview.addEventListener('click', function(){    
@@ -82,13 +51,7 @@ botonreview.addEventListener('click', function(){
     }
 })
 
-
-
-
 ///////////////////////////////////////////////////////////////////////////
-
-
-
 
 function nombreGenero() {
     let botones = document.querySelectorAll(".link");
@@ -101,10 +64,44 @@ function nombreGenero() {
   }
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////
 
+function favoritos() {
+
+        let favoritos = [];
+    
+        let recuperoStorage = localStorage.getItem('favoritos');
+    
+        if (recuperoStorage != null) {
+            favoritos = JSON.parse(recuperoStorage);
+        }
+        
+        let boton = document.querySelector('.fa-heart');
+
+        if (favoritos.includes(idsRecuperado)) {
+            boton.classList.remove('fa-regular');
+            boton.classList.add('fa-solid');
+        }
+        
+        boton.addEventListener("click", function() {
+            if (favoritos.includes(idsRecuperado)) {
+                let indice = favoritos.indexOf(idsRecuperado)
+                favoritos.splice(indice, 1);
+                boton.classList.remove('fa-solid');
+                boton.classList.add('fa-regular');
+            } else {
+                favoritos.push(idsRecuperado);
+                boton.classList.remove('fa-regular');
+                boton.classList.add('fa-solid');
+            }
+       
+            let favoritosToString = JSON.stringify(favoritos);
+            localStorage.setItem('favoritos', favoritosToString )
+        } )
+    
+}
+
+///////////////////////////////////////////
 
 fetch(detallePelicula)
     .then(function (response) {
@@ -148,10 +145,8 @@ fetch(detallePelicula)
                     if (posterPath != null)
                         {fotos += `
                         <div id="nomandfav">
-                            <a name=${movie_title}><h3>${movie_title}</h3></a>
-                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
-                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                        
+                            <a name=${movie_title}><h3 id="titdetmo">${movie_title}</h3></a>
+                            <i id="${movie_id}" class="fa-regular fa-heart"></i>
                         </div>
                         <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
@@ -163,10 +158,8 @@ fetch(detallePelicula)
                     else{
                         fotos += `
                         <div id="nomandfav">
-                            <a name=${movie_title}><h3>${movie_title}</h3></a>
-                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
-                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                        
+                            <a name=${movie_title}><h3 id="titdetmo">${movie_title}</h3></a>
+                            <i id="${movie_id}" class="coraVacio fa-regular fa-heart"></i
                         </div>
                         <p class="geneross">Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
@@ -178,30 +171,27 @@ fetch(detallePelicula)
                     }
                 }
                 else{
-                    if (posterPath != null)
-                        {fotos += `
+                    if (posterPath != null){
+                        fotos += `
                         <div id="nomandfav">
-                            <a name=${movie_title}><h3>${movie_title}</h3></a>
-                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
-                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                        
+                            <a name=${movie_title}><h3 id="titdetmo">${movie_title}</h3></a>
+                            <i id="${movie_id}" class="coraVacio fa-regular fa-heart"></i>
                         </div>
-                        <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <p class="geneross">Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
                             <img class="fotos" src="${poster}">
                             <p class="sinopsis">"${sinopsis}"</p>
                         </div>
                         <p>No hay trailer disponible para este titulo.</p>
-                    `;}
+                    `;
+                    }
                     else{
                         fotos += `
                         <div id="nomandfav">
-                            <a name=${movie_title}><h3>${movie_title}</h3></a>
-                                <i id="${movie_id}" class="coraVacio fa-regular fa-heart" style="color: #ffffff;"></i>
-                                <i id="${movie_id}" class="coraLleno fa-solid fa-heart" style="color: #ffffff;"></i>
-                        
+                            <a name=${movie_title}><h3 id="titdetmo">${movie_title}</h3></a>
+                            <i id="${movie_id}" class="coraVacio fa-regular fa-heart"></i>
                         </div>
-                        <p class= geneross >Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
+                        <p class="geneross">Calificacion: ${calificacion} | ${duracion} mins | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
                             <img class="fotos" src="./img/LOGO/Image_not_available.png">
                             <p class="sinopsis">"${sinopsis}"</p>
@@ -211,7 +201,9 @@ fetch(detallePelicula)
                     }
                 }
                 div.innerHTML = fotos;
+                
                 nombreGenero()
+                favoritos()
 
                 })
                 .catch(function(error) {
@@ -232,7 +224,7 @@ fetch(detallePelicula)
                 let div_peli_recom = document.querySelector(".peliculas_recomendacion")
                 let peliss = ""
                 if (results.length != 0) {
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 6; i++) {
                         let movie_id = results[i].id;
                         let movie_title = results[i].title;
                         let fecha = results[i].release_date;
@@ -327,75 +319,6 @@ fetch(detallePelicula)
 
 
 ////////////////////////////////////////////////////////////////////////////
-document.addEventListener("DOMContentLoaded", function(){
 
-
-
-
-    let favoritos = [];
-
-
-
-
-    let recuperoStorage = localStorage.getItem('favoritos');
-
-
-
-
-    if (recuperoStorage != null) {
-        favoritos = JSON.parse(recuperoStorage);
-    }
-
-
-
-
-    let coraLleno = document.querySelector(".coraLleno");
-    let coraVacio = document.querySelector(".coraVacio");
-
-
-
-    if (favoritos.includes(favId)) {
-        coraVacio.style.display = 'none';
-        coraLleno.style.display = 'block';
-    }
-
-
-
-
-    let boton = document.querySelector('.fa-heart');
-
-
-
-
-    let idPeli = boton.id
-
-
-
-
-    boton.addEventListener('click', function() {
-        alert()
-
-
-
-
-        // if (favoritos.includes(idPeli)) {
-        //     let indice = favoritos.indexOf(idPeli)
-        //     favoritos.splice(indice, 1);
-        //     coraVacio.style.display = 'block';
-        //     coraLleno.style.display = 'none';
-        // } else {
-        //     favoritos.push(idPeli);
-        //     coraVacio.style.display = 'none';
-        //     coraLleno.style.display = 'block';
-        // }
-   
-        // let favoritosToString = JSON.stringify(favoritos);
-        // localStorage.setItem('favoritos', favoritosToString )
-    } )
-
-
-
-
-})
 
 

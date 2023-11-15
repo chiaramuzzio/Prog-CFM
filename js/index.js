@@ -48,7 +48,7 @@ fetch(urlMejoresCalificadas)
         }
 
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
             let movie_title = truncar(results[nro].title);
@@ -120,7 +120,7 @@ fetch(urlPopulares)
             }
         }
        
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
             let movie_title = results[nro].title;
@@ -192,7 +192,7 @@ fetch(urlSeriesPopulares)
         }
 
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let serie_id = results[nro].id;
             let serie_title = results[nro].name;

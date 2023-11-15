@@ -23,14 +23,7 @@ if (nombregeneropelicula != null){
         let fotos = ``;
         let div = document.querySelector("#inner-genero");
 
-
-
-
-
-
-
-
-        for (let i = 0; i<5; i++){
+        for (let i = 0; i<6; i++){
             let movie_id = results[i].id;
             let movie_title = results[i].title;
             let fecha = results[i].release_date;
@@ -73,7 +66,7 @@ if (nombregeneropelicula != null){
     })
 }
 
-else{
+else {
     titulogenero.innerHTML = nombre
     let detalleGenero = `https://api.themoviedb.org/3/discover/tv?api_key=${api_key}&with_genres=${nombregeneroserie}`;
 
@@ -87,7 +80,7 @@ else{
         let fotos = ``;
         let div = document.querySelector("#inner-genero");
 
-        for (let i = 0; i<5; i++){
+        for (let i = 0; i<6; i++){
             let serie_id = results[i].id;
             let serie_title = results[i].name;
             let fecha = results[i].first_air_date;
