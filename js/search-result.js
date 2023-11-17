@@ -20,6 +20,18 @@ document.addEventListener("DOMContentLoaded", function(){
     
     let api_key = "378786c706182646715863ed0e6d66cc";
     let urlBusqueda = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${resulBusqueda}`;
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+function truncar(titulo) {
+    // Ejemplo de cómo limitar la longitud del título a 50 caracteres
+        let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
+    
+            return tituloCorto
+            
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////////
     
     
     fetch(urlBusqueda)
@@ -39,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(){
             else {
                 for (let i = 0; i<6; i++){
                     let movie_id = results[i].id;
-                    let movie_title = results[i].title;
+                    let movie_title = truncar(results[i].title);
                     let fecha = results[i].release_date;
                     let posterPath = results[i].poster_path;
                     let poster = "https://image.tmdb.org/t/p/w200" + posterPath;

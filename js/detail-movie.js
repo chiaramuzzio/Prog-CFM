@@ -2,6 +2,18 @@ let queryString = location.search;
 let queryStringObj = new URLSearchParams(queryString);
 let idsRecuperado = queryStringObj.get("movie_id");
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+function truncar(titulo) {
+    // Ejemplo de cómo limitar la longitud del título a 50 caracteres
+        let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
+    
+            return tituloCorto
+            
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 let api_key = "378786c706182646715863ed0e6d66cc"
@@ -11,7 +23,7 @@ let botonReviews = `https://api.themoviedb.org/3/movie/${idsRecuperado}/reviews?
 
 console.log(idsRecuperado);
 
-/////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 
 let botonrecom = document.querySelector(".botonrecom")
 let peliculas_recomendacion = document.querySelector(".peliculas_recomendacion")
@@ -226,7 +238,7 @@ fetch(detallePelicula)
                 if (results.length != 0) {
                     for (let i = 0; i < 6; i++) {
                         let movie_id = results[i].id;
-                        let movie_title = results[i].title;
+                        let movie_title = truncar(results[i].title);
                         let fecha = results[i].release_date;
                         let posterPath = results[i].poster_path
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath

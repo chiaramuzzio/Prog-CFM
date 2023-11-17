@@ -5,6 +5,18 @@ let nombregeneroserie = queryStringObj.get("boton-serie"); //id serie
 
 let api_key = "378786c706182646715863ed0e6d66cc"
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+function truncar(titulo) {
+    // Ejemplo de cómo limitar la longitud del título a 50 caracteres
+        let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
+    
+            return tituloCorto
+            
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////////
+
 let titulogenero = document.querySelector("#nombre-genero")
 
 let nombre = JSON.parse(localStorage.getItem("name")) || [];
@@ -25,7 +37,7 @@ if (nombregeneropelicula != null){
 
         for (let i = 0; i<6; i++){
             let movie_id = results[i].id;
-            let movie_title = results[i].title;
+            let movie_title = truncar(results[i].title);
             let fecha = results[i].release_date;
             let posterPath = results[i].poster_path;
             let poster = "https://image.tmdb.org/t/p/w200" + posterPath;

@@ -3,7 +3,17 @@ let queryStringObj = new URLSearchParams(queryString);
 let idsRecuperado = queryStringObj.get("serie_id");
 
 
+//////////////////////////////////////////////////////////////////////////////////////
 
+function truncar(titulo) {
+    // Ejemplo de cómo limitar la longitud del título a 50 caracteres
+        let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
+    
+            return tituloCorto
+            
+    }
+    
+///////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 
@@ -131,9 +141,6 @@ fetch(detallePelicula)
                         {fotos += `
                         <div id="nomandfav">
                             <a name=${movie_title}><h3>${movie_title}</h3></a>
-                            <button class="favorite-button">
-                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
                         </div>
                         <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
@@ -146,9 +153,6 @@ fetch(detallePelicula)
                         fotos += `
                         <div id="nomandfav">
                             <a name=${movie_title}><h3>${movie_title}</h3></a>
-                            <button class="favorite-button">
-                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
                         </div>
                         <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
@@ -164,9 +168,6 @@ fetch(detallePelicula)
                     fotos += `
                     <div id="nomandfav">
                         <a name=${movie_title}><h3>${movie_title}</h3></a>
-                        <button class="favorite-button">
-                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                        </button>
                     </div>
                     <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                     <div class="info">
@@ -179,9 +180,6 @@ fetch(detallePelicula)
                         fotos += `
                         <div id="nomandfav">
                             <a name=${movie_title}><h3>${movie_title}</h3></a>
-                            <button class="favorite-button">
-                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                            </button>
                         </div>
                         <p>Calificacion: ${calificacion} | ${generosAgregar} | ${fecha}</p>
                         <div class="info">
@@ -216,7 +214,7 @@ fetch(detallePelicula)
                 if (results.length != 0) {
                     for (let i = 0; i < 5; i++) {
                         let movie_id = results[i].id;
-                        let movie_title = results[i].name;
+                        let movie_title = truncar(results[i].name);
                         let fecha = results[i].first_air_date;
                         let posterPath = results[i].poster_path
                         let poster = "https://image.tmdb.org/t/p/w200" + posterPath;

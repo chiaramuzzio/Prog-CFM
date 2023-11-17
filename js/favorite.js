@@ -2,6 +2,18 @@ let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 let api_key = "378786c706182646715863ed0e6d66cc"
 let divFavorite = document.querySelector('.portada');
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+function truncar(titulo) {
+  // Ejemplo de cómo limitar la longitud del título a 50 caracteres
+      let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
+  
+          return tituloCorto
+          
+  }
+  
+///////////////////////////////////////////////////////////////////////////////////////
+
 if (favoritos == null || favoritos.length == 0) {
   divFavorite.innerHTML = '<p> No hay favoritos seleccionados </p>'
 } 
@@ -18,7 +30,7 @@ else {
       .then(function(data){
         console.log(data);
         let movie_id = data.id;
-        let movie_title = data.title;
+        let movie_title = truncar(data.title);
         let fecha = data.release_date;
         let posterPath = data.poster_path
         let poster = "https://image.tmdb.org/t/p/w200" + posterPath

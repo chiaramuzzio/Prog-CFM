@@ -8,18 +8,10 @@ let urlSeriesPopulares = `https://api.themoviedb.org/3/tv/popular?api_key=${api_
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function truncar(titulo) {
-        document.querySelector("#valor").style.width = '220px';
+// Ejemplo de cómo limitar la longitud del título a 50 caracteres
+    let tituloCorto = titulo.length > 25 ? titulo.substring(0, 25) + "..." : titulo;
 
-        let contenedorElement = document.querySelector("#valor")
-    
-        if (titulo.scrollWidth > contenedorElement.clientWidth) {
-            while (titulo.scrollWidth > contenedorElement.clientWidth && titulo.length > 0) {
-                titulo = titulo.slice(0, -1);
-                titulo = titulo + '...';
-            }
-        }
-
-        return titulo
+        return tituloCorto
         
 }
 
@@ -51,7 +43,7 @@ fetch(urlMejoresCalificadas)
         for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
-            let movie_title = truncar(results[nro].title);
+            let titulo = truncar(results[nro].title);
             let fecha = results[nro].release_date;
             let posterPath = results[nro].poster_path
 
@@ -61,9 +53,9 @@ fetch(urlMejoresCalificadas)
                 fotos += `
                 <div class ="portada">
                     <div class="pelicula">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${titulo}"></a>
                         <div class="titfav">
-                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${titulo}</h4></a>
                         </div>
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                     </div>    
@@ -75,9 +67,9 @@ fetch(urlMejoresCalificadas)
                 fotos += `
                 <div class ="portada">
                     <div class="pelicula">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${titulo}"></a>
                         <div class="titfav">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${titulo}</h4></a>
                         </div>
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                     </div>    
@@ -123,7 +115,7 @@ fetch(urlPopulares)
         for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
-            let movie_title = results[nro].title;
+            let titulo = results[nro].title;
             let fecha = results[nro].release_date;
             let posterPath = results[nro].poster_path;
             if (posterPath != null){
@@ -132,9 +124,9 @@ fetch(urlPopulares)
             fotos += `
                 <div class ="portada">
                     <div class="pelicula">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${movie_title}"></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src=${poster} alt="${titulo}"></a>
                         <div class="titfav">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${titulo}</h4></a>
                         </div>
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                     </div>    
@@ -145,9 +137,9 @@ fetch(urlPopulares)
                 fotos += `
                 <div class ="portada">
                     <div class="pelicula">
-                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${movie_title}"></a>
+                        <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><img id="fotopeli" class="fotos" src="./img/LOGO/Image_not_available.png" alt="${titulo}"></a>
                         <div class="titfav">
-                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${movie_title}</h4></a>
+                            <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><h4 id="${movie_id}" class="capturarId">${titulo}</h4></a>
                         </div>
                         <a href="./detail-movie.html?movie_id=${movie_id}" class="addPic"><p class="addDate">Fecha de estreno: ${fecha}</p></a>
                     </div>    
