@@ -236,7 +236,7 @@ fetch(detallePelicula)
                 let div_peli_recom = document.querySelector(".peliculas_recomendacion")
                 let peliss = ""
                 if (results.length != 0) {
-                    for (let i = 0; i < 6; i++) {
+                    for (let i = 0; i < 5; i++) {
                         let movie_id = results[i].id;
                         let movie_title = truncar(results[i].title);
                         let fecha = results[i].release_date;

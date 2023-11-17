@@ -306,6 +306,15 @@ footer{
     display: flex;
     padding-top: 30px;
 }
+.peliculas_recomendacion{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.peli_reviews{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .botonrecom{
     margin-right: 15px;
@@ -346,6 +355,7 @@ footer{
 
 #reviews{
     margin-top: 30px;
+    flex-wrap: wrap;
     display: flex;
     justify-content:flex-start;
     align-items: center;
@@ -358,10 +368,12 @@ footer{
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 10px;
+
 }
 
 .peli_reviews{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     margin-left: 20px;
