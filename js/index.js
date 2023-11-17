@@ -115,7 +115,7 @@ fetch(urlPopulares)
         for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
-            let titulo = results[nro].title;
+            let titulo = truncar(results[nro].title);
             let fecha = results[nro].release_date;
             let posterPath = results[nro].poster_path;
             if (posterPath != null){
@@ -187,7 +187,7 @@ fetch(urlSeriesPopulares)
         for (let i = 0; i < 6; i++) {
             let nro = nros[i];
             let serie_id = results[nro].id;
-            let serie_title = results[nro].name;
+            let serie_title = truncar(results[nro].name);
             let fecha = results[nro].first_air_date;            
             let posterPath = results[nro].poster_path;
             if (posterPath != null){
