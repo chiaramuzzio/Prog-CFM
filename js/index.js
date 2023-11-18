@@ -40,7 +40,7 @@ fetch(urlMejoresCalificadas)
         }
 
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 5; i++) {
             let nro = nros[i];
             let movie_id = results[nro].id;
             let titulo = truncar(results[nro].title);
