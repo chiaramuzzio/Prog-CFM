@@ -49,7 +49,7 @@ function truncar(titulo) {
                 div.innerHTML = '<p class=“no_result">No hay resultado para su búsqueda</p>';
             } 
             else {
-                for (let i = 0; i<6; i++){
+                for (let i = 0; i<5; i++){
                     let movie_id = results[i].id;
                     let movie_title = truncar(results[i].title);
                     let fecha = results[i].release_date;
